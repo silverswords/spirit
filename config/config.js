@@ -79,16 +79,16 @@ export default {
   routes: [
     {
       path: '/',
-      component: '../layouts/UserLayout',
+      component: '../layouts/SimpleLayout',
       routes: [
         {
           path: '/',
           redirect: '/config'
         },
         {
-          name: 'config',
+          name: '参数配置',
           path: '/config',
-          component: './user/login',
+          component: './config',
         },
       ],
     },

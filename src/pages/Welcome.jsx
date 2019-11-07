@@ -21,7 +21,7 @@ export default () => (
   <PageHeaderWrapper>
     <Card>
       <Alert
-        message="umi ui 现已发布，欢迎使用 npm run ui 启动体验。"
+        message="Power"
         type="success"
         showIcon
         banner
