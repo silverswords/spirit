@@ -1,5 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {
+  app,
+  BrowserWindow
+} = require('electron')
 const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -9,14 +12,16 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 960,
+    width: 1280,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
       allowRunningInsecureContent: true,
     }
   })
+
+  mainWindow.setFullScreen(true)
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:8000/#/')
