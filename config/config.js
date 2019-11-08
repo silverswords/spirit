@@ -90,6 +90,11 @@ export default {
           path: '/config',
           component: './config',
         },
+        {
+          name: '结果展示',
+          path: '/result',
+          component: './result',
+        },
       ],
     },
   ],

@@ -1,11 +1,16 @@
-import React, { Component } from 'react';
-import { Row, Col, Card } from 'antd';
+import React, { Component } from 'react'
+import { Row, Col, Button } from 'antd'
+import router from 'umi/router'
 
 import Global from './components/Global'
 import Filter from './components/Filter'
-import styles from './style.less';
+import styles from './style.less'
 
 class Configuration extends Component {
+  startCalculation = () => {
+    router.push('/result')
+  }
+
   render() {
     return (
       <div className={styles.main}>
@@ -17,6 +22,9 @@ class Configuration extends Component {
             <Filter />
           </Col>
         </Row>
+        <Button type="primary" size={'large'} onClick={this.startCalculation}>
+          开始计算
+        </Button>
       </div>
     );
   }
