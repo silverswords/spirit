@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, Checkbox, InputNumber } from 'antd';
+import { Row, Col, Card, InputNumber } from 'antd';
 import styles from './global.less';
-
-const gridStyle = {
-  width: '100%',
-  textAlign: 'left',
-  marginTop: '4px',
-}
 
 const spanStyle = {
   marginRight: '12px',
@@ -26,7 +20,7 @@ class Global extends Component {
           <Row gutter={8}>
             <Col span={6}>
               <Card title="三相四线 - 正相序">
-                <Card.Grid style={gridStyle}>
+                <Card.Grid>
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
@@ -59,7 +53,7 @@ class Global extends Component {
             </Col>
             <Col span={6}>
               <Card title="三相四线 - 逆相序">
-                <Card.Grid style={gridStyle}>
+                <Card.Grid>
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
@@ -92,7 +86,7 @@ class Global extends Component {
             </Col>
             <Col span={6}>
               <Card title="三相三线 - 正相序">
-                <Card.Grid style={gridStyle}>
+                <Card.Grid>
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
@@ -103,7 +97,7 @@ class Global extends Component {
                     />
                   </p>
                   <p>
-                    <span style={spanStyle}>二元件</span>
+                    <span style={spanStyle}>三元件</span>
                     <InputNumber
                       defaultValue={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][conf.defs.phaseCIndex]
@@ -117,7 +111,7 @@ class Global extends Component {
             </Col>
             <Col span={6} style={{height: '100%'}}>
               <Card title="三相三线 - 逆相序">
-                <Card.Grid style={gridStyle}>
+                <Card.Grid>
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
@@ -128,7 +122,7 @@ class Global extends Component {
                     />
                   </p>
                   <p>
-                    <span style={spanStyle}>二元件</span>
+                    <span style={spanStyle}>三元件</span>
                     <InputNumber
                       defaultValue={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][conf.defs.phaseCIndex]
@@ -153,7 +147,7 @@ class Global extends Component {
       <div>
         <Card title='全局配置'>
           <Card title='正确接线时 A 相电流角度配置'>
-            <Card.Grid style={gridStyle}>
+            <Card.Grid>
               <p>
                 <span style={spanStyle}>范围</span>
                 <InputNumber
