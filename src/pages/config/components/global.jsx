@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'dva';
-import { Row, Col, Card, InputNumber } from 'antd';
-import styles from './global.less';
+import React, { Component } from 'react'
+import { connect } from 'dva'
+import { Row, Col, Card, InputNumber } from 'antd'
+import styles from './global.less'
 
 const spanStyle = {
   marginRight: '12px',

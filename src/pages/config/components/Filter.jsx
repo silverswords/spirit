@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'dva';
-import { Card, Checkbox } from 'antd';
-import styles from './filter.less';
+import React, { Component } from 'react'
+import { connect } from 'dva'
+import { Card, Checkbox } from 'antd'
+import styles from './filter.less'
 
 @connect(({ filter }) => ({
   conf: filter,
