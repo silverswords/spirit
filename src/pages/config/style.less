@@ -1,39 +1,28 @@
 @import '~antd/es/style/themes/default.less';
 
 .main {
-  width: 368px;
+  width: 96%;
   margin: 0 auto;
   @media screen and (max-width: @screen-sm) {
     width: 95%;
   }
 
-  .icon {
-    margin-left: 16px;
-    color: rgba(0, 0, 0, 0.2);
-    font-size: 24px;
-    vertical-align: middle;
-    cursor: pointer;
-    transition: color 0.3s;
-
-    &:hover {
-      color: @primary-color;
+  /*:global {
+    .ant-card {
+      border-radius: 0;
     }
-  }
 
-  .other {
-    margin-top: 24px;
-    line-height: 22px;
-    text-align: left;
-
-    .register {
-      float: right;
+    .ant-card-bordered {
+      border: none,
     }
-  }
 
-  :global {
-    .antd-pro-login-submit {
-      width: 100%;
-      margin-top: 24px;
+    .ant-card-head {
+      border: none;
+      border-bottom: 1px solid #e8e8e8;
     }
-  }
+
+    .ant-card-grid {
+      box-shadow: none;
+    }
+  }*/
 }
