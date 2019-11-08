@@ -15,7 +15,10 @@ const ConfigurationModel = {
     voltagePhaseDelay: [
 			[[0.0, 120.0, 240.0], [0.0, 240.0, 120.0]],
 			[[330.0, undefined, 270.0], [30.0, undefined, 90.0]],
-    ],
+		],
+		global: {
+			currentADelayAngle: 8.0,
+		}
   },
   effects: {
   },
