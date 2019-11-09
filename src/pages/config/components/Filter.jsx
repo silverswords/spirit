@@ -1,18 +1,45 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { Card, Checkbox } from 'antd'
+import PreFilter from './PreFilter'
 import styles from './filter.less'
 
 @connect(({ filter }) => ({
   conf: filter,
 }))
 class Filter extends Component {
+  state = {
+    selectedFilter: 0,
+  }
+
+  componentDidMount() {
+    const { conf } = this.props
+
+    this.setState({
+      selectedFilter: conf.pre.preFiltersSelected.indexOf(true)
+    })
+  }
+
   onCheckBoxChanged = (val) => {
     const { dispatch } = this.props
 
     dispatch({
       type: 'filter/filterChanged',
       payload: val,
+    })
+  }
+
+  renderFilterContent = () => {
+    return (
+      <>
+        <PreFilter filterType={this.state.selectedFilter} />
+      </>
+    )
+  }
+
+  onFilterTabListChanged = (key) => {
+    this.setState({
+      selectedFilter: key
     })
   }
 
@@ -56,7 +83,10 @@ class Filter extends Component {
           </Card.Grid>
           <Card.Grid>
             <Card title='过滤器参数设置'
-              tabList={labels}>
+              tabList={labels}
+              activeTabKey={this.state.selectedFilter}
+              onTabChange={this.onFilterTabListChanged}>
+              { this.renderFilterContent() }
             </Card>
           </Card.Grid>
         </Card>

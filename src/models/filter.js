@@ -15,8 +15,8 @@ const FilterModel = {
       pre: {
         preFiltersSelected: [true, true, true, true, true, true],
         params: [
-          [],
-          [],
+          [0.0, 0.0],
+          [30],
           [],
           [],
           [],

@@ -24,7 +24,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][conf.defs.phaseAIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -33,7 +33,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>二元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][conf.defs.phaseBIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -42,7 +42,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>三元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][conf.defs.phaseCIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -57,7 +57,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][conf.defs.phaseAIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -66,7 +66,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>二元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][conf.defs.phaseBIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -75,7 +75,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>三元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][conf.defs.phaseCIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -90,7 +90,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][conf.defs.phaseAIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -99,7 +99,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>三元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][conf.defs.phaseCIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -115,7 +115,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>一元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][conf.defs.phaseAIndex]
                       }
                       min={0} max={360} step={0.1} 
@@ -124,7 +124,7 @@ class Global extends Component {
                   <p>
                     <span style={spanStyle}>三元件</span>
                     <InputNumber
-                      defaultValue={
+                      value={
                         conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][conf.defs.phaseCIndex]
                       }
                       min={0} max={360} step={0.1}
@@ -151,14 +151,14 @@ class Global extends Component {
               <p>
                 <span style={spanStyle}>范围</span>
                 <InputNumber
-                  defaultValue={
+                  value={
                     conf.global.currentADelayAngle
                   }
                   min={0} max={8.0} step={0.1} 
                 />
                 <span> - </span>
                 <InputNumber
-                  defaultValue={
+                  value={
                     conf.global.currentADelayAngle + 60.0
                   }
                   disabled 
