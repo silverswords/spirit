@@ -100,7 +100,6 @@ class PreFilter extends Component {
                   <InputNumber
                     value={ conf.pre.params[conf.defs.preUnderVoltageCheck][1] }
                     min={0}
-                    max={100}
                     step={1.0}
                   />
                   <span className={styles.last_child}>V</span>
@@ -117,7 +116,6 @@ class PreFilter extends Component {
                   <InputNumber
                     value={ conf.pre.params[conf.defs.preUnderVoltageCheck][2] }
                     min={0}
-                    max={100}
                     step={1.0}
                   />
                   <span className={styles.last_child}>V</span>
@@ -127,7 +125,6 @@ class PreFilter extends Component {
                   <InputNumber
                     value={ conf.pre.params[conf.defs.preUnderVoltageCheck][3] }
                     min={0}
-                    max={100}
                     step={1.0}
                   />
                   <span className={styles.last_child}>V</span>
@@ -137,7 +134,6 @@ class PreFilter extends Component {
                   <InputNumber
                     value={ conf.pre.params[conf.defs.preUnderVoltageCheck][4] }
                     min={0}
-                    max={100}
                     step={1.0}
                   />
                   <span className={styles.last_child}>V</span>

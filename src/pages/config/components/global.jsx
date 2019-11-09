@@ -154,7 +154,7 @@ class Global extends Component {
                   value={
                     conf.global.currentADelayAngle
                   }
-                  min={0} max={8.0} step={0.1} 
+                  min={0} max={360.0} step={1.0} 
                 />
                 <span> - </span>
                 <InputNumber
