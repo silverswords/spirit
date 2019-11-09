@@ -17,22 +17,46 @@ const titles = [
 }))
 class PreFilter extends Component {
   renderPowerCheck = () => {
-    const { conf } = this.props
+    const { conf, dispatch } = this.props
+
+    const onActiveChange = (val) => {
+      dispatch({
+        type: 'filter/preFilterValueChanged',
+        payload: {
+          row: conf.defs.prePowerCheck,
+          column: 0,
+          value: val,
+        }
+      })
+    }
+
+    const onInactiveChange = (val) => {
+      dispatch({
+        type: 'filter/preFilterValueChanged',
+        payload: {
+          row: conf.defs.prePowerCheck,
+          column: 1,
+          value: val,
+        }
+      })
+    }
 
     return (
       <>
         <p>
           <span>有功功率 &le;</span>
           <InputNumber
-            value={conf.pre.params[conf.defs.prePowerCheck][0]}
-            min={0} max={1.0} step={0.01} 
+            value={ conf.pre.params[conf.defs.prePowerCheck][0] }
+            min={0} step={0.01}
+            onChange={onActiveChange} 
           />
         </p>
         <p>
           <span>无功功率 &le;</span>
           <InputNumber
-            value={conf.pre.params[conf.defs.prePowerCheck][1]}
-            min={0} max={1.0} step={0.01} 
+            value={ conf.pre.params[conf.defs.prePowerCheck][1] }
+            min={0} step={0.01} 
+            onChange={onInactiveChange}
           />
         </p>
       </>
@@ -49,7 +73,6 @@ class PreFilter extends Component {
           <InputNumber
             value={ conf.pre.params[conf.defs.preLoadCheck][0] }
             min={0}
-            max={100}
             formatter={value => `${value}%`}
             parser={value => value.replace('%', '')}
           />
@@ -57,6 +80,7 @@ class PreFilter extends Component {
       </>
     )
   }
+
   renderPhaseSeqCheck = () => {
     const { conf } = this.props
 

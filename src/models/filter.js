@@ -32,6 +32,13 @@ const FilterModel = {
           type: 'rebuildFilterSelected',
           payload: payload,
         })
+      },
+
+      *preFilterValueChanged({ payload }, { put }) {
+        yield put({
+          type: 'rebuildPreFilterParams',
+          payload: payload,
+        })
       }
     },
     reducers: {
@@ -48,6 +55,21 @@ const FilterModel = {
             ...state.pre,
             preFiltersSelected: filterSelected,
           },
+        }
+      },
+
+      rebuildPreFilterParams(state, { payload }) {
+        let { row, column, value } = payload
+        let params = state.pre.params
+
+        params[row][column] = value
+
+        return {
+          ...state,
+          pre: {
+            ...state.pre,
+            params: params,
+          }
         }
       }
     },
