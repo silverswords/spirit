@@ -109,13 +109,13 @@ class Map extends Component {
 			dragEnable: false,
       zoom: 8,
 			center: [114.998400,39.100311],
-			mapStyle: 'amap://styles/whitesmoke',
+			mapStyle: 'amap://styles/macaron',
 		})
 		
 		let smap = new AMap.Map('smap', {
       resizeEnable: true,
       zoom: 10,
-			mapStyle: 'amap://styles/light',
+			mapStyle: 'amap://styles/macaron',
     })
 		
 		this.lockMainMap(mmap)
