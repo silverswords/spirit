@@ -16,11 +16,11 @@ const FilterModel = {
         preFiltersSelected: [true, true, true, true, true, true],
         params: [
           [0.0, 0.0],
-          [30],
-          [],
-          [],
-          [],
-          [],
+          [20.0],
+          [10.0],
+          [90.0, 180.0, 198.0, 198.0, 198.0, 90.0],
+          [15.0],
+          [15.0],
         ]
       },
       post: {

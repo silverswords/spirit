@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
-import { Card, InputNumber } from 'antd'
+import { Row, Col, Card, InputNumber } from 'antd'
 import styles from './prefilter.less'
 
 const titles = [
@@ -57,6 +57,155 @@ class PreFilter extends Component {
       </>
     )
   }
+  renderPhaseSeqCheck = () => {
+    const { conf } = this.props
+
+    return (
+      <>
+        <p>
+          <span>三相有功功率值之和与总有功功率值的差值 &gt; 总有功功率值的</span>
+          <InputNumber
+            value={ conf.pre.params[conf.defs.prePhaseSeqCheck][0] }
+            min={0}
+            max={100}
+            formatter={value => `${value}%`}
+            parser={value => value.replace('%', '')}
+          />
+        </p>
+      </>
+    )
+  }
+  
+  renderUnderVoltageCheck = () => {
+    const { conf } = this.props
+
+    return (
+      <>
+        <Row gutter={12}>
+          <Col span={8}>
+            <Card title='高供高计三相三线100V'>
+              <Card.Grid>
+                <p>
+                  <span>一元件、三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][0] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                  />
+                  <span className={styles.last_child}>V</span>
+                </p>
+                <p>
+                  <span>一元件、三元件相电压和 &le;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][1] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                  />
+                  <span className={styles.last_child}>V</span>
+                </p>
+                <p>&nbsp;</p>
+              </Card.Grid>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title='高供低计'>
+              <Card.Grid>
+                <p>
+                  <span>一元件电压&lt;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][2] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                  />
+                  <span className={styles.last_child}>V</span>
+                </p>
+                <p>
+                  <span>二元件电压&lt;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][3] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                  />
+                  <span className={styles.last_child}>V</span>
+                </p>
+                <p>
+                  <span>三元件电压&lt;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][4] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                  />
+                  <span className={styles.last_child}>V</span>
+                </p>
+              </Card.Grid>
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title='高供高计且三相四线额定电压57.7V'>
+              <Card.Grid>
+                <p>
+                  <span>电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                  <InputNumber
+                    value={ conf.pre.params[conf.defs.preUnderVoltageCheck][5] }
+                    min={0}
+                    max={100}
+                    step={1.0}
+                    formatter={value => `${value}%`}
+                    parser={value => value.replace('%', '')}
+                  />
+                </p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+              </Card.Grid>
+            </Card>
+          </Col>
+        </Row>
+      </>
+    )
+  }
+
+  renderVoltageBalanceCheck = () => {
+    const { conf } = this.props
+
+    return (
+      <>
+        <p>
+          <span>（最大电压－最小电压）/ 最大电压 &gt;</span>
+          <InputNumber
+            value={ conf.pre.params[conf.defs.preVoltageBalanceCheck][0] }
+            min={0}
+            max={100}
+            formatter={value => `${value}%`}
+            parser={value => value.replace('%', '')}
+          />
+        </p>
+      </>
+    )
+  }
+
+  renderCurrentBalanceCheck = () => {
+    const { conf } = this.props
+
+    return (
+      <>
+        <p>
+          <span>（最大电流－最小电流）/ 最大电流 &gt;</span>
+          <InputNumber
+            value={ conf.pre.params[conf.defs.preCurrentBalanceCheck][0] }
+            min={0}
+            max={100}
+            formatter={value => `${value}%`}
+            parser={value => value.replace('%', '')}
+          />
+        </p>
+      </>
+    )
+  }
 
   renderPreFilter = (type) => {
     const { conf } = this.props
@@ -68,16 +217,16 @@ class PreFilter extends Component {
       return this.renderLoadCheck()
     
     if (type == conf.defs.prePhaseSeqCheck)
-      return this.renderLoadCheck()
+      return this.renderPhaseSeqCheck()
     
     if (type == conf.defs.preUnderVoltageCheck)
-      return this.renderLoadCheck()
+      return this.renderUnderVoltageCheck()
 
     if (type == conf.defs.preVoltageBalanceCheck)
-      return this.renderLoadCheck()
+      return this.renderVoltageBalanceCheck()
       
     if (type == conf.defs.preCurrentBalanceCheck)
-      return this.renderLoadCheck()
+      return this.renderCurrentBalanceCheck()
       
     return (
       <>
