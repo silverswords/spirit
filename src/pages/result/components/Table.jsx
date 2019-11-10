@@ -11,8 +11,6 @@ class ResultTable extends Component {
     tmpNodes: this.props.conf.model,
     searchText: ''
   }
-  componentDidMount() {
-  }
 
   getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -74,7 +72,7 @@ class ResultTable extends Component {
     this.setState({ searchText: '' });
   };
 
-  handleChange = (extra) => {
+  handleChange = (filters, extra) => {
     const { dispatch } = this.props
     let flitersRule = {
       name: extra.name || [],
@@ -101,9 +99,9 @@ class ResultTable extends Component {
         ...this.getColumnSearchProps('name')
       },
       {
-        title: '经纬坐标',
-        dataIndex: 'location',
-        key: 'location'
+        title: '坐标',
+        dataIndex: 'coordinate',
+        key: 'coordinate'
       },
       {
         title: '结果',

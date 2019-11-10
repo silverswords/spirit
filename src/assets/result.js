@@ -23,7 +23,7 @@ for (let i = 0; i < 100; i ++) {
     index: i,
     name: `变电站 ${i} 号`,
     location: [+lng.toFixed(6), +lat.toFixed(6)], 
-    result
+    result,
   }
 
   data.nodes.push(obj)

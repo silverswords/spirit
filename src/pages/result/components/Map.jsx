@@ -18,7 +18,7 @@ class Map extends Component {
   back = () => {
     router.push('/')
   }
-
+  
 	lockMainMap = (map) => {
 		const bounds = map.getBounds()
 
