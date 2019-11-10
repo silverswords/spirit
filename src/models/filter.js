@@ -10,7 +10,9 @@ const FilterModel = {
         preCurrentBalanceCheck: 5,    // 电流不平衡
         preFilterLabel: (id) => {
           return ['有功无功检查', '负荷正常', '相序异常', '电压失压', '电压不平衡', '电流不平衡', ][id]
-        }
+        },
+
+        postCurrentPhase: 0,
       },
       pre: {
         preFiltersSelected: [true, true, true, true, true, true],
@@ -24,6 +26,9 @@ const FilterModel = {
         ]
       },
       post: {
+        params: [
+          [5.0, 175.0, 185.0]
+        ]
       },
     },
     effects: {
