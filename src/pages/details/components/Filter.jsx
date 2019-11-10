@@ -1,38 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
 import { Card } from 'antd';
+import PreFilter from './PreFilter';
 import styles from './filter.less';
 
 @connect(({ filter }) => ({
   conf: filter,
 }))
 class Filter extends Component {
-  state = {
-    selectedFilter: 0,
-  };
-
-  componentDidMount() {
-    const { conf } = this.props;
-
-    this.setState({
-      selectedFilter: conf.pre.preFiltersSelected.indexOf(true),
-    });
-  }
-
   render() {
+    const { conf } = this.props;
     return (
       <div className={styles.filter_config}>
-        <Card title="数据过滤条件设置">
-          <Card.Grid>
-            <Card
-              title="过滤器参数设置"
-              // tabList={labels}
-              activeTabKey={this.state.selectedFilter}
-              // onTabChange={this.onFilterTabListChanged}
-            >
-              {/* {this.renderFilterContent()} */}
-            </Card>
-          </Card.Grid>
+        <Card title="过滤器参数">
+          <Card bordered={false} title={conf.defs.preFilterLabel(0)}>
+            <PreFilter filterType={0} />
+          </Card>
+          <Card bordered={false} title={conf.defs.preFilterLabel(1)}>
+            <PreFilter filterType={1} />
+          </Card>
+          <Card bordered={false} title={conf.defs.preFilterLabel(2)}>
+            <PreFilter filterType={2} />
+          </Card>
+          <Card bordered={false} title={conf.defs.preFilterLabel(3)}>
+            <PreFilter filterType={3} />
+          </Card>
+          <Card bordered={false} title={conf.defs.preFilterLabel(4)}>
+            <PreFilter filterType={4} />
+          </Card>
+          <Card bordered={false} title={conf.defs.preFilterLabel(0)}>
+            <PreFilter filterType={5} />
+          </Card>
         </Card>
       </div>
     );

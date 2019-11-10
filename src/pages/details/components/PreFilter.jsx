@@ -26,12 +26,12 @@ class PreFilter extends Component {
     return (
       <>
         <p>
-          <span>有功功率 &le;</span>
-          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][0]}</span>
+          <span>有功功率 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][0]}.00</span>
         </p>
         <p>
-          <span>无功功率 &le;</span>
-          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][1]}</span>
+          <span>无功功率 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][1]}.00</span>
         </p>
       </>
     );
@@ -71,66 +71,41 @@ class PreFilter extends Component {
         <Row gutter={12}>
           <Col span={8}>
             <Card title="高供高计三相三线100V">
-              <Card.Grid>
-                <p>
-                  <span>
-                    一元件、三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le;
-                  </span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][0]}
-                  </span>
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>一元件、三元件相电压和 &le;</span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][1]}
-                  </span>
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>&nbsp;</p>
-              </Card.Grid>
+              <p>
+                <span>一元件、三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][0]}V</span>
+              </p>
+              <p>
+                <span>一元件、三元件相电压和 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][1]}V</span>
+              </p>
+              <p>&nbsp;</p>
             </Card>
           </Col>
           <Col span={8}>
             <Card title="高供低计">
-              <Card.Grid>
-                <p>
-                  <span>一元件电压&lt;</span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][2]}
-                  </span>
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>二元件电压&lt;</span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][3]}
-                  </span>
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>三元件电压&lt;</span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][4]}
-                  </span>
-                  <span className={styles.last_child}>V</span>
-                </p>
-              </Card.Grid>
+              <p>
+                <span>一元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][2]}V</span>
+              </p>
+              <p>
+                <span>二元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][3]}V</span>
+              </p>
+              <p>
+                <span>三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&lt;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][4]}V</span>
+              </p>
             </Card>
           </Col>
           <Col span={8}>
             <Card title="高供高计且三相四线额定电压57.7V">
-              <Card.Grid>
-                <p>
-                  <span>电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
-                  <span style={spanStyle}>
-                    {conf.pre.params[conf.defs.preUnderVoltageCheck][5]}%
-                  </span>
-                </p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-              </Card.Grid>
+              <p>
+                <span>电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                <span style={spanStyle}>{conf.pre.params[conf.defs.preUnderVoltageCheck][5]}%</span>
+              </p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
             </Card>
           </Col>
         </Row>
@@ -144,7 +119,7 @@ class PreFilter extends Component {
     return (
       <>
         <p>
-          <span>（最大电压－最小电压）/ 最大电压 &gt;</span>
+          <span>（最大电压－最小电压）/ 最大电压 &nbsp;&nbsp;&nbsp;&nbsp;&gt;</span>
           <span style={spanStyle}>{conf.pre.params[conf.defs.preVoltageBalanceCheck][0]}%</span>
         </p>
       </>
@@ -157,7 +132,7 @@ class PreFilter extends Component {
     return (
       <>
         <p>
-          <span>（最大电流－最小电流）/ 最大电流 &gt;</span>
+          <span>（最大电流－最小电流）/ 最大电流 &nbsp;&nbsp;&nbsp;&nbsp;&gt;</span>
           <span style={spanStyle}>{conf.pre.params[conf.defs.preCurrentBalanceCheck][0]}%</span>
         </p>
       </>
@@ -191,9 +166,7 @@ class PreFilter extends Component {
 
     return (
       <div className={styles.prefilter}>
-        <Card title={titles[type]}>
-          <Card.Grid>{this.renderPreFilter(type)}</Card.Grid>
-        </Card>
+        <Card title={titles[type]}>{this.renderPreFilter(type)}</Card>
       </div>
     );
   }

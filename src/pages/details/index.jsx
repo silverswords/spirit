@@ -4,6 +4,7 @@ import router from 'umi/router';
 
 import Global from './components/Global';
 import Filter from './components/Filter';
+import PostFilter from './components/PostFilter';
 import styles from './style.less';
 
 class Details extends Component {
@@ -26,18 +27,21 @@ class Details extends Component {
             <Filter />
           </Col>
           <Col span={24}>
+            <PostFilter />
+          </Col>
+          <Col span={24}>
             <Card title="上传文件">
               <Col span={12}>
                 <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" directory>
                   <Button>
-                    <Icon type="upload" /> Upload Directory
+                    <Icon type="upload" /> 运行数据文件
                   </Button>
                 </Upload>
               </Col>
               <Col span={12}>
                 <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" directory>
                   <Button>
-                    <Icon type="upload" /> Upload Directory
+                    <Icon type="upload" /> Sg186数据文件
                   </Button>
                 </Upload>
               </Col>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, InputNumber, Checkbox } from 'antd';
+import { Row, Col, Card, InputNumber } from 'antd';
 import styles from './global.less';
 
 const spanStyle = {
@@ -209,8 +209,6 @@ class Global extends Component {
   };
 
   render() {
-    const { conf } = this.props;
-
     return (
       <div className={styles.global_config}>
         <Row gutter={10}>
