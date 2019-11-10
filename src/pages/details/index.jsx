@@ -41,7 +41,7 @@ class Details extends Component {
               <Col span={12}>
                 <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" directory>
                   <Button>
-                    <Icon type="upload" /> Sg186数据文件
+                    <Icon type="upload" /> SG186数据文件
                   </Button>
                 </Upload>
               </Col>
