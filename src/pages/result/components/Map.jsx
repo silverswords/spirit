@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
-import { Row, Col, Card, Button } from 'antd'
+import { Row, Col, Modal } from 'antd'
 import router from 'umi/router'
 
 import styles from './map.less'
 
-@connect(({ filter }) => ({
-  conf: filter,
+@connect(({ result }) => ({
+  conf: result,
 }))
 class Map extends Component {
+  state = {
+    selectedNode: {},
+    markers: this.props.conf.result,
+    visible: false
+  }
+
   back = () => {
     router.push('/')
   }
@@ -95,8 +101,65 @@ class Map extends Component {
 
   getMapinfo = (smap) => {
     smap.getCity((info) => {
-      console.log(info)
       this.showSecondLandscape(smap, info.district)
+    })
+  }
+
+  addMarkersToMain = (mmap, smap) => {
+    const { AMap } = window
+
+    const getInfoM = (e) => {
+      for (let i = 0; i < this.state.markers.length; i ++) {
+        if (e.target.B.extData.id === this.state.markers[i].index) {
+          let iconAddress
+          if (this.state.markers[i].result == '正确') {
+            iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+          } else {
+            iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+          }
+
+          smap.clearMap()
+
+          new AMap.Marker({
+            map: smap,
+            bubble: true,
+            icon: new AMap.Icon({
+              image: iconAddress,
+              imageSize: new AMap.Size(15,18)
+            }),
+            position: this.state.markers[i].location,
+          })
+
+          break
+        } else {
+          smap.clearMap()
+        }
+      }
+    }
+
+    this.props.conf.result.forEach(function(marker) {
+      let iconAddress
+      if (marker.result == '正确') {
+        iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+      } else {
+        iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+      }
+
+      const newMarker = new AMap.Marker({
+        map: mmap,
+        bubble: true,
+        icon: new AMap.Icon({
+          image: iconAddress,
+          imageSize: new AMap.Size(15,18)
+        }),
+        position: marker.location,
+        extData: {
+          id: marker.index
+        },
+        clickable: true
+      })
+
+      newMarker.on('click', getInfoM)
     })
   }
 
@@ -110,22 +173,58 @@ class Map extends Component {
       zoom: 8,
 			center: [114.998400,39.100311],
 			mapStyle: 'amap://styles/macaron',
-		})
+    })
+    
+    mmap.clearMap()
 		
 		let smap = new AMap.Map('smap', {
       resizeEnable: true,
       zoom: 10,
 			mapStyle: 'amap://styles/macaron',
     })
-		
+    
+    smap.clearMap()
+    
 		this.lockMainMap(mmap)
     this.showMainLandscape(mmap)
 		this.setupMapOnClick(mmap, (e) => {
+      smap.panTo([e.lnglat.getLng(), e.lnglat.getLat()])
+
+    })
+    this.setupMapMoveend(smap, (e) => {
+      this.getMapinfo(smap)
+    })
+    this.addMarkersToMain(mmap, smap)
+  }
+
+  componentDidUpdate() {
+    let mmap = new AMap.Map('mmap', {
+      resizeEnable: true,
+			zoomEnable: false,
+			dragEnable: false,
+      zoom: 8,
+			center: [114.998400,39.100311],
+			mapStyle: 'amap://styles/macaron',
+    })
+    
+    mmap.clearMap()
+
+    let smap = new AMap.Map('smap', {
+      resizeEnable: true,
+      zoom: 10,
+			mapStyle: 'amap://styles/macaron',
+    })
+    
+    smap.clearMap()
+
+    this.showMainLandscape(mmap)
+    this.setupMapOnClick(mmap, (e) => {
       smap.panTo([e.lnglat.getLng(), e.lnglat.getLat()])
     })
     this.setupMapMoveend(smap, (e) => {
       this.getMapinfo(smap)
     })
+    this.addMarkersToMain(mmap, smap)
   }
 
   render() {
@@ -138,12 +237,6 @@ class Map extends Component {
 					<Col span={12}>
             <div ref='smap' id='smap' className={styles.map}></div>
           </Col>
-					<Col span={24}>
-						<Card title='结果详细数据'></Card>
-            <Button type="primary" size={'large'} onClick={this.back}>
-              返回
-            </Button>
-					</Col>
         </Row>
       </div>
     );

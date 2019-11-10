@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Row, Col, Card } from 'antd'
+import { Row, Col, Card, Button } from 'antd'
 import Map from './components/Map'
+import ResultTable from './components/Table'
 
 import styles from './style.less'
 
@@ -12,6 +13,12 @@ class Result extends Component {
           <Col span={24}>
             <Map />
           </Col>
+          <Col span={24}>
+            <ResultTable />
+            <Button type="primary" size={'large'} onClick={this.back}>
+              返回
+            </Button>
+					</Col>
         </Row>
       </div>
     );
