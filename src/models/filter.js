@@ -8,14 +8,15 @@ const FilterModel = {
         preUnderVoltageCheck: 3,      // 电压失压
         preVoltageBalanceCheck: 4,    // 电压不平衡
         preCurrentBalanceCheck: 5,    // 电流不平衡
+        preLoadStableCheck: 6,        // 负载稳定
         preFilterLabel: (id) => {
-          return ['有功无功检查', '负荷正常', '相序异常', '电压失压', '电压不平衡', '电流不平衡', ][id]
+          return ['有功无功检查', '负荷正常', '相序异常', '电压失压', '电压不平衡', '电流不平衡', '负载稳定',][id]
         },
 
         postCurrentPhase: 0,
       },
       pre: {
-        preFiltersSelected: [true, true, true, true, true, true],
+        preFiltersSelected: [true, true, true, true, true, true, true],
         params: [
           [0.0, 0.0],
           [20.0],
@@ -23,6 +24,7 @@ const FilterModel = {
           [90.0, 180.0, 198.0, 198.0, 198.0, 90.0],
           [15.0],
           [15.0],
+          [100.0, 60.0],
         ]
       },
       post: {
@@ -48,7 +50,7 @@ const FilterModel = {
     },
     reducers: {
       rebuildFilterSelected(state, { payload }) {
-        let filterSelected = [false, false, false, false, false, false]
+        let filterSelected = [false, false, false, false, false, false, false]
 
         payload.map(val => {
           filterSelected[val] = true
