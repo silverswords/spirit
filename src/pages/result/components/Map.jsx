@@ -61,7 +61,8 @@ class Map extends Component {
       district.setLevel('distinct') // province, city, distinct
       district.search(search, function(status, result) {
         map.remove(polygons)
-        let polygons = []
+        polygons = []
+
         const bounds = result.districtList[0].boundaries
         if (bounds) {
           for (let i = 0, l = bounds.length; i < l; i++) {
@@ -133,7 +134,6 @@ class Map extends Component {
       mmap.clearMap()
       this.props.conf.result.forEach(function(marker) {
         let iconAddress
-
         if (marker.result == '正确') {
           iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
         } else {
