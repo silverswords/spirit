@@ -83,12 +83,17 @@ export default {
       routes: [
         {
           path: '/',
-          redirect: '/config'
+          redirect: '/config',
         },
         {
           name: '参数配置',
           path: '/config',
           component: './config',
+        },
+        {
+          name: '配置详情',
+          path: '/details/',
+          component: './details',
         },
         {
           name: '结果展示',

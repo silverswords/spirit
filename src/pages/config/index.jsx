@@ -1,15 +1,19 @@
-import React, { Component } from 'react'
-import { Row, Col, Button } from 'antd'
-import router from 'umi/router'
+import React, { Component } from 'react';
+import { Row, Col, Button } from 'antd';
+import { connect } from 'dva';
+import router from 'umi/router';
 
-import Global from './components/Global'
-import Filter from './components/Filter'
-import styles from './style.less'
+import Global from './components/Global';
+import Filter from './components/Filter';
+import styles from './style.less';
 
+@connect(({ configuration }) => ({
+  conf: configuration,
+}))
 class Configuration extends Component {
   startCalculation = () => {
-    router.push('/result')
-  }
+    router.push('/details/');
+  };
 
   render() {
     return (
@@ -22,7 +26,7 @@ class Configuration extends Component {
             <Filter />
           </Col>
         </Row>
-        <Button type="primary" size={'large'} onClick={this.startCalculation}>
+        <Button type="primary" size="large" onClick={this.startCalculation}>
           开始计算
         </Button>
       </div>
