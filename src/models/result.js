@@ -16,7 +16,6 @@ const ResultModel = {
   reducers: {
     rebuildFilterSelected(state, { payload }) {
       let result
-      console.log(payload)
       result = state.model.filter((item) => {
         if (item.name == payload.name[0]) {
           return true
@@ -31,8 +30,6 @@ const ResultModel = {
         result = state.model
       }
      
-      console.log(result)
-
       return {
         ...state,
         filters: payload,

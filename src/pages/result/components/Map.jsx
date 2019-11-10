@@ -115,7 +115,7 @@ class Map extends Component {
               iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
             }
   
-            new AMap.Marker({
+            const newMarker = new AMap.Marker({
               map: smap,
               bubble: true,
               icon: new AMap.Icon({
@@ -124,7 +124,9 @@ class Map extends Component {
               }),
               position: this.state.markers[i].location,
             })
-
+            const node_lnglat = newMarker.getPosition()
+            
+            smap.panTo([node_lnglat.lng, node_lnglat.lat])
             this.showModal(this.state.markers[i])
             break
           }
