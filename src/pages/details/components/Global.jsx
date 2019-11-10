@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card } from 'antd';
+import { Row, Col, Card, InputNumber } from 'antd';
 import styles from './global.less';
 
 const spanStyle = {
