@@ -52,7 +52,7 @@ class Details extends Component {
               计算结果
             </Button>
           </Col>
-          <Col span={12}>
+          <Col span={22}>
             <Button type="primary" size="large" onClick={this.back}>
               返回
             </Button>
