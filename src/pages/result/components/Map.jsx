@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { Row, Col, Modal } from 'antd'
-import router from 'umi/router'
 
 import styles from './map.less'
 
@@ -15,13 +14,8 @@ class Map extends Component {
     visible: false
   }
 
-  back = () => {
-    router.push('/')
-  }
-  
 	lockMainMap = (map) => {
 		const bounds = map.getBounds()
-
 		map.setLimitBounds(bounds)
   }
 
@@ -57,7 +51,6 @@ class Map extends Component {
 
     return (map, search) => {
       const { AMap } = window
-  
       const opts = {
         subdistrict: 0,
         extensions: 'all',
@@ -105,61 +98,77 @@ class Map extends Component {
     })
   }
 
-  addMarkersToMain = (mmap, smap) => {
-    const { AMap } = window
+  addMarkersToMain = undefined
 
-    const getInfoM = (e) => {
-      for (let i = 0; i < this.state.markers.length; i ++) {
-        if (e.target.B.extData.id === this.state.markers[i].index) {
-          let iconAddress
-          if (this.state.markers[i].result == '正确') {
-            iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
-          } else {
-            iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+  addMarkersToMainGenerator = (mmap, smap) => {
+    return () => {
+      const { AMap } = window
+      const getInfoM = (e) => {
+        smap.clearMap()
+
+        for (let i = 0; i < this.state.markers.length; i ++) {
+          if (e.target.B.extData.id === this.state.markers[i].index) {
+            let iconAddress
+            if (this.state.markers[i].result == '正确') {
+              iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+            } else {
+              iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+            }
+  
+            new AMap.Marker({
+              map: smap,
+              bubble: true,
+              icon: new AMap.Icon({
+                image: iconAddress,
+                imageSize: new AMap.Size(15,18)
+              }),
+              position: this.state.markers[i].location,
+            })
+
+            this.showModal(this.state.markers[i])
+            break
           }
-
-          smap.clearMap()
-
-          new AMap.Marker({
-            map: smap,
-            bubble: true,
-            icon: new AMap.Icon({
-              image: iconAddress,
-              imageSize: new AMap.Size(15,18)
-            }),
-            position: this.state.markers[i].location,
-          })
-
-          break
-        } else {
-          smap.clearMap()
         }
       }
-    }
-
-    this.props.conf.result.forEach(function(marker) {
-      let iconAddress
-      if (marker.result == '正确') {
-        iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
-      } else {
-        iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
-      }
-
-      const newMarker = new AMap.Marker({
-        map: mmap,
-        bubble: true,
-        icon: new AMap.Icon({
-          image: iconAddress,
-          imageSize: new AMap.Size(15,18)
-        }),
-        position: marker.location,
-        extData: {
-          id: marker.index
-        },
-        clickable: true
+  
+      mmap.clearMap()
+      this.props.conf.result.forEach(function(marker) {
+        let iconAddress
+        if (marker.result == '正确') {
+          iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+        } else {
+          iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+        }
+  
+        let newMarker = new AMap.Marker({
+          map: mmap,
+          bubble: true,
+          icon: new AMap.Icon({
+            image: iconAddress,
+            imageSize: new AMap.Size(15,18)
+          }),
+          position: marker.location,
+          extData: {
+            id: marker.index
+          },
+          clickable: true
+        })
+  
+        newMarker.on('click', getInfoM)
       })
+    }
+  }
 
-      newMarker.on('click', getInfoM)
+  showModal = (info) => {
+    this.setState({
+      visible: true,
+      selectedNode: info || this.state.info
+    })
+  }
+
+  handleCancel = e => {
+    this.setState({
+      visible: false
     })
   }
 
@@ -184,51 +193,27 @@ class Map extends Component {
     })
     
     smap.clearMap()
-    
+
 		this.lockMainMap(mmap)
     this.showMainLandscape(mmap)
 		this.setupMapOnClick(mmap, (e) => {
       smap.panTo([e.lnglat.getLng(), e.lnglat.getLat()])
-
     })
+
     this.setupMapMoveend(smap, (e) => {
       this.getMapinfo(smap)
     })
-    this.addMarkersToMain(mmap, smap)
-  }
 
-  componentDidUpdate() {
-    let mmap = new AMap.Map('mmap', {
-      resizeEnable: true,
-			zoomEnable: false,
-			dragEnable: false,
-      zoom: 8,
-			center: [114.998400,39.100311],
-			mapStyle: 'amap://styles/macaron',
+    this.setupMapOnClick(smap, (e) =>{
+      this.showModal(this.state.selectedNode)
     })
     
-    mmap.clearMap()
-
-    let smap = new AMap.Map('smap', {
-      resizeEnable: true,
-      zoom: 10,
-			mapStyle: 'amap://styles/macaron',
-    })
-    
-    smap.clearMap()
-
-    this.showMainLandscape(mmap)
-    this.setupMapOnClick(mmap, (e) => {
-      smap.panTo([e.lnglat.getLng(), e.lnglat.getLat()])
-    })
-    this.setupMapMoveend(smap, (e) => {
-      this.getMapinfo(smap)
-    })
-    this.addMarkersToMain(mmap, smap)
+    this.addMarkersToMain = this.addMarkersToMainGenerator(mmap, smap)
+    this.addMarkersToMain()
   }
 
   render() {
-    return (
+    const result = (
       <div className={styles.map_container}>
         <Row gutter={[12, 12]}>
           <Col span={12}>
@@ -238,8 +223,24 @@ class Map extends Component {
             <div ref='smap' id='smap' className={styles.map}></div>
           </Col>
         </Row>
+        <Modal
+          title="详细信息"
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          footer={null}
+        >
+          <p>名称：{this.state.selectedNode.name}</p>
+          <p>位置：{this.state.selectedNode.coordinate}</p>
+          <p>信息：{this.state.selectedNode.result}</p>
+        </Modal>
       </div>
-    );
+    )
+
+    if (this.addMarkersToMain != undefined) {
+      this.addMarkersToMain()
+    }
+
+    return result
   }
 }
 
