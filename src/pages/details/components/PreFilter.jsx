@@ -14,6 +14,7 @@ const titles = [
   '电压失压参数配置',
   '电压不平衡参数配置',
   '电流不平衡参数配置',
+  '负载稳定参数配置',
 ];
 
 @connect(({ filter }) => ({
@@ -139,6 +140,28 @@ class PreFilter extends Component {
     );
   };
 
+  renderLoadStableCheck = () => {
+    const { conf } = this.props;
+
+    return (
+      <>
+        <p>
+          <span>
+            变压器运行容量
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
+          </span>
+          <span>{conf.pre.params[conf.defs.preLoadStableCheck][0]}</span>
+          <span>kVA</span>
+        </p>
+        <p>并且</p>
+        <p>
+          <span>各相负荷电流 &gt; 变压器额定电流的 </span>
+          <span>{conf.pre.params[conf.defs.preLoadStableCheck][1]}%</span>
+        </p>
+      </>
+    );
+  };
+
   renderPreFilter = type => {
     const { conf } = this.props;
 
@@ -153,6 +176,8 @@ class PreFilter extends Component {
     if (type === conf.defs.preVoltageBalanceCheck) return this.renderVoltageBalanceCheck();
 
     if (type === conf.defs.preCurrentBalanceCheck) return this.renderCurrentBalanceCheck();
+
+    if (type === conf.defs.preLoadStableCheck) return this.renderLoadStableCheck();
 
     return (
       <>

@@ -39,6 +39,10 @@ class Filter extends Component {
             <Meta title={conf.defs.preFilterLabel(5)} style={{ marginBottom: 16 }} />
             <PreFilter filterType={5} />
           </Card>
+          <Card bordered={false}>
+            <Meta title={conf.defs.preFilterLabel(6)} style={{ marginBottom: 16 }} />
+            <PreFilter filterType={6} />
+          </Card>
         </Card>
       </div>
     );
