@@ -25,7 +25,7 @@ const ConfigurationModel = {
 		  yield put({
 		    type: 'rebuildVoltagePhase',
 		    payload: payload,
-		  });
+		  })
     },
     *changeCurrentAngle({ payload }, { put }) {
       yield put({
@@ -44,7 +44,7 @@ const ConfigurationModel = {
       return {
         ...state,
         voltagePhaseDelay: newVoltagePhase
-      };
+      }
     },
     rebuildCurrentAngle(state, {payload}) {
       return {
@@ -55,6 +55,6 @@ const ConfigurationModel = {
         }
       }
     }
-  },
+  }
 };
 export default ConfigurationModel;

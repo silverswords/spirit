@@ -5,14 +5,14 @@ import styles from './global.less';
 
 const spanStyle = {
   marginRight: '12px',
-};
+}
 
 @connect(({ configuration }) => ({
   conf: configuration,
 }))
 class Global extends Component {
   renderVoltage = () => {
-    const { conf, dispatch } = this.props;
+    const { conf, dispatch } = this.props
 
     const changeConfiguration = (value, phaseIndex, lineMode, phaseSeq) => {
       let newlineMode = lineMode | undefined
@@ -221,7 +221,7 @@ class Global extends Component {
         </Card>
       </div>
     );
-  };
+  }
 
   renderCurrentAngle = () => {
     const { conf, dispatch } = this.props;
@@ -248,7 +248,7 @@ class Global extends Component {
                   onChange={changeCurrentAngle}
                 />
                 <span> - </span>
-                <InputNumber value={conf.global.currentADelayAngle + 60.0} disabled />
+                <InputNumber value={conf.global.currentADelayAngle + 60.0 < 360 ? conf.global.currentADelayAngle + 60.0 : conf.global.currentADelayAngle - 300.0} disabled />
               </p>
               <p unselectable>&nbsp;</p>
               <p unselectable>&nbsp;</p>
@@ -256,7 +256,7 @@ class Global extends Component {
           </Card>
         </Card>
       </div>
-    );
+    )
   };
 
   render() {
@@ -270,7 +270,7 @@ class Global extends Component {
           <Col span={6}>{this.renderCurrentAngle()}</Col>
         </Row>
       </div>
-    );
+    )
   }
 }
 
