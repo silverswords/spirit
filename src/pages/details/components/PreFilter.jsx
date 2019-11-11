@@ -146,10 +146,7 @@ class PreFilter extends Component {
     return (
       <>
         <p>
-          <span>
-            变压器运行容量
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
-          </span>
+          <span>变压器运行容量 &nbsp;&nbsp;&nbsp;&nbsp;&gt;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span>{conf.pre.params[conf.defs.preLoadStableCheck][0]}</span>
           <span>kVA</span>
         </p>
