@@ -21,7 +21,7 @@ const SimpleLayout = props => {
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
-                <span className={styles.title}>保定供电局</span>
+                <span className={styles.title}>国网保定供电公司</span>
               </Link>
             </div>
             <div className={styles.desc}>计量装置错误接线分析与处理</div>

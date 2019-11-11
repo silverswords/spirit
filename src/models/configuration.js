@@ -21,8 +21,40 @@ const ConfigurationModel = {
 		}
   },
   effects: {
+	  *changeVoltagePhase({ payload }, { put }) {
+		  yield put({
+		    type: 'rebuildVoltagePhase',
+		    payload: payload,
+		  });
+    },
+    *changeCurrentAngle({ payload }, { put }) {
+      yield put({
+        type: 'rebuildCurrentAngle',
+        payload: payload
+      })
+    }
   },
   reducers: {
+    rebuildVoltagePhase(state, { payload }) {
+      let { phaseIndex, lineMode, phaseSeq, value } = payload
+      let newVoltagePhase = state.voltagePhaseDelay
+
+      newVoltagePhase[phaseIndex][lineMode][phaseSeq] = value
+
+      return {
+        ...state,
+        voltagePhaseDelay: newVoltagePhase
+      };
+    },
+    rebuildCurrentAngle(state, {payload}) {
+      return {
+        ...state,
+        global: {
+          ...global,
+          currentADelayAngle: payload
+        }
+      }
+    }
   },
 };
 export default ConfigurationModel;

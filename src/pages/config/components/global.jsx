@@ -12,7 +12,20 @@ const spanStyle = {
 }))
 class Global extends Component {
   renderVoltage = () => {
-    const { conf } = this.props;
+    const { conf, dispatch } = this.props;
+
+    const changeConfiguration = (value, phaseIndex, lineMode, phaseSeq) => {
+      let newlineMode = lineMode | undefined
+      dispatch({
+        type: 'configuration/changeVoltagePhase',
+        payload: {
+          value,
+          phaseIndex,
+          lineMode: newlineMode,
+          phaseSeq
+        }
+      })
+    }
 
     return (
       <div>
@@ -32,6 +45,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -45,6 +61,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseBIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -58,6 +77,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
+                      }}
                     />
                   </p>
                 </Card.Grid>
@@ -77,6 +99,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -90,6 +115,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseBIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -103,6 +131,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
+                      }}
                     />
                   </p>
                 </Card.Grid>
@@ -122,6 +153,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -135,6 +169,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
+                      }}
                     />
                   </p>
                   <p>&nbsp;</p>
@@ -155,6 +192,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
+                      }}
                     />
                   </p>
                   <p>
@@ -168,6 +208,9 @@ class Global extends Component {
                       min={0}
                       max={360}
                       step={0.1}
+                      onChange={(value) => {
+                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
+                      }}
                     />
                   </p>
                   <p>&nbsp;</p>
@@ -181,7 +224,14 @@ class Global extends Component {
   };
 
   renderCurrentAngle = () => {
-    const { conf } = this.props;
+    const { conf, dispatch } = this.props;
+
+    const changeCurrentAngle = val => {
+      dispatch({
+        type: 'configuration/changeCurrentAngle',
+        payload: val
+      })
+    }
 
     return (
       <div>
@@ -195,6 +245,7 @@ class Global extends Component {
                   min={0}
                   max={360.0}
                   step={1.0}
+                  onChange={changeCurrentAngle}
                 />
                 <span> - </span>
                 <InputNumber value={conf.global.currentADelayAngle + 60.0} disabled />
