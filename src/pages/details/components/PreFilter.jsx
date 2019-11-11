@@ -28,11 +28,11 @@ class PreFilter extends Component {
       <>
         <p>
           <span>有功功率 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
-          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][0]}.00</span>
+          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][0]}</span>
         </p>
         <p>
           <span>无功功率 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
-          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][1]}.00</span>
+          <span style={spanStyle}>{conf.pre.params[conf.defs.prePowerCheck][1]}</span>
         </p>
       </>
     );

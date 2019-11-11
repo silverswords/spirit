@@ -28,7 +28,6 @@ class Global extends Component {
                         conf.defs.phaseAIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -39,7 +38,6 @@ class Global extends Component {
                         conf.defs.phaseBIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -50,7 +48,6 @@ class Global extends Component {
                         conf.defs.phaseCIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
               </Card>
@@ -65,7 +62,6 @@ class Global extends Component {
                         conf.defs.phaseAIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -76,7 +72,6 @@ class Global extends Component {
                         conf.defs.phaseBIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -87,7 +82,6 @@ class Global extends Component {
                         conf.defs.phaseCIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
               </Card>
@@ -102,7 +96,6 @@ class Global extends Component {
                         conf.defs.phaseAIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -113,7 +106,6 @@ class Global extends Component {
                         conf.defs.phaseCIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>&nbsp;</p>
@@ -129,7 +121,6 @@ class Global extends Component {
                         conf.defs.phaseAIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>
@@ -140,7 +131,6 @@ class Global extends Component {
                         conf.defs.phaseCIndex
                       ]
                     }
-                    .0
                   </span>
                 </p>
                 <p>&nbsp;</p>
@@ -161,9 +151,9 @@ class Global extends Component {
           <Card title="正确接线时 A 相电流角度">
             <p>
               <span style={spanStyle}>范围</span>
-              <span style={spanStyle}>{conf.global.currentADelayAngle}.0</span>
+              <span style={spanStyle}>{conf.global.currentADelayAngle}</span>
               <span style={spanStyle}> - </span>
-              <span style={spanStyle}>{conf.global.currentADelayAngle + 60.0}.0</span>
+              <span style={spanStyle}>{conf.global.currentADelayAngle + 60.0}</span>
             </p>
             <p unselectable>&nbsp;</p>
             <p unselectable>&nbsp;</p>
