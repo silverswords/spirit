@@ -7,14 +7,11 @@ const props = {
   accept: '.xlsx, .xls',
   transformFile(file) {
     let data = [];
-    console.log(file, 'file');
     const reader = new FileReader();
     reader.readAsBinaryString(file);
-    console.log(reader, 'reader');
     reader.onload = event => {
       try {
         const { result } = event.target;
-        console.log(event, 'event');
         const workbook = XLSX.read(result, { type: 'binary' });
         for (const sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
