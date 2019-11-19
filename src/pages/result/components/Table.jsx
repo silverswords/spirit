@@ -3,6 +3,8 @@ import { connect } from 'dva'
 import { Card, Table, Input, Button, Icon } from 'antd'
 import Highlighter from 'react-highlight-words';
 
+import JsonToExel from './JsonToExel'
+
 @connect(({ result }) => ({
   conf: result,
 }))
@@ -120,7 +122,7 @@ class ResultTable extends Component {
     ]
 
     return (
-      <Card title='结果详细数据'>
+      <Card title='结果详细数据' extra={<JsonToExel />}>
         <Table
           dataSource={this.state.tmpNodes}
           columns={colunms}
