@@ -36,7 +36,13 @@ class Algorithm extends Component {
         }
       },
       function filterFour(data) {
-        if (data.e == 1) {
+        if (data.e1 <= conf.pre.params[conf.defs.preUnderVoltageCheck][0] &&
+            data.e2 <= conf.pre.params[conf.defs.preUnderVoltageCheck][1] &&
+            data.e3 < conf.pre.params[conf.defs.preUnderVoltageCheck][2] &&
+            data.e4 < conf.pre.params[conf.defs.preUnderVoltageCheck][3] &&
+            data.e5 < conf.pre.params[conf.defs.preUnderVoltageCheck][4] &&
+            data.e6 <= conf.pre.params[conf.defs.preUnderVoltageCheck][5]
+          ) {
           return true;
         } else {
           return false;
@@ -73,7 +79,7 @@ class Algorithm extends Component {
         if (handlers[i](data)) {
           continue;
         } else {
-          data.info = `${conf.filters.preFilterResult[i]}`;
+          data.info = `${conf.filters.preFilterResult(i)}`;
           return false;
         }
       }
