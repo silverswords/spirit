@@ -11,6 +11,7 @@ const titles = ['电流角相位配置', '元件电流相等配置'];
 class PostFilter extends Component {
   renderCurrentPhase = () => {
     const { conf } = this.props;
+    console.log(conf.filters.dataList[0]['变压器容量'])
 
     return (
       <>

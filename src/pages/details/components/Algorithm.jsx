@@ -88,27 +88,27 @@ class Algorithm extends Component {
     return true;
   };
 
-  onDataFilter = () => {
-    const { conf } = this.props;
-    let finalResult = [];
-    let removedResult = [];
-    for (let i = 0; i < conf.filters.dataList.length; i++) {
-      let reuslt = this.onPreFilter(conf.filters.dataList[i]);
-      if (reuslt) {
-        finalResult.push(conf.filters.dataList[i]);
-      } else {
-        removedResult.push(conf.filters.dataList[i]);
-      }
-    }
+  // onDataFilter = () => {
+  //   const { conf } = this.props;
+  //   let finalResult = [];
+  //   let removedResult = [];
+  //   for (let i = 0; i < conf.filters.dataList.length; i++) {
+  //     let reuslt = this.onPreFilter(conf.filters.dataList[i]);
+  //     if (reuslt) {
+  //       finalResult.push(conf.filters.dataList[i]);
+  //     } else {
+  //       removedResult.push(conf.filters.dataList[i]);
+  //     }
+  //   }
 
-    console.log('finalResult: ', finalResult);
-    console.log('removedResult: ', removedResult);
-  };
+  //   console.log('finalResult: ', finalResult);
+  //   console.log('removedResult: ', removedResult);
+  // };
 
   render() {
     return (
       <div className={styles.main}>
-        <Button type="primary" size="large" onClick={this.onDataFilter}>
+        <Button type="primary" size="large">
           开始计算
         </Button>
       </div>
