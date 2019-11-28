@@ -13,12 +13,12 @@ class Algorithm extends Component {
     const handlers = [
       function filterOne(data) {
         if (
-          data.a <= conf.pre.params[conf.defs.prePowerCheck][0] &&
-          data.b <= conf.pre.params[conf.defs.prePowerCheck][1]
+          data['effectivePower'] <= conf.pre.params[conf.defs.prePowerCheck][0] ||
+          data['reactivePower'] <= conf.pre.params[conf.defs.prePowerCheck][1]
         ) {
-          return true;
-        } else {
           return false;
+        } else {
+          return true;
         }
       },
       function filterTwo(data) {
@@ -29,37 +29,53 @@ class Algorithm extends Component {
         }
       },
       function filterThree(data) {
-        if (data.d > conf.pre.params[conf.defs.prePhaseSeqCheck][0]) {
-          return true;
-        } else {
+        let tmpEffectivePower = 0
+        let configPower = conf.pre.params[conf.defs.prePhaseSeqCheck][0]
+
+        for (let i = 0; i < 3; i++) {
+          tmpEffectivePower += data['phaseEffectivePower'][i]
+        }
+
+        if (tmpEffectivePower - data['effectivePower'] > data['effectivePower'] * configPower ) {
           return false;
+        } else {
+          return true;
         }
       },
       function filterFour(data) {
-        if (data.e1 <= conf.pre.params[conf.defs.preUnderVoltageCheck][0] &&
-            data.e2 <= conf.pre.params[conf.defs.preUnderVoltageCheck][1] &&
-            data.e3 < conf.pre.params[conf.defs.preUnderVoltageCheck][2] &&
-            data.e4 < conf.pre.params[conf.defs.preUnderVoltageCheck][3] &&
-            data.e5 < conf.pre.params[conf.defs.preUnderVoltageCheck][4] &&
-            data.e6 <= conf.pre.params[conf.defs.preUnderVoltageCheck][5]
-          ) {
-          return true;
+        const configMinPower = conf.pre.params[conf.defs.preUnderVoltageCheck][0]
+        const configTotalMinPower = conf.pre.params[conf.defs.preUnderVoltageCheck][1]
+        const configAPower = conf.pre.params[conf.defs.preUnderVoltageCheck][2]
+        const configBPower = conf.pre.params[conf.defs.preUnderVoltageCheck][3]
+        const configCPower = conf.pre.params[conf.defs.preUnderVoltageCheck][4]
+        const configMinVol = conf.pre.params[conf.defs.preUnderVoltageCheck][5]
+        if (
+          (data['phaseVoltage'][0] <= configMinPower && data['phaseVoltage'][2] <= configMinPower && data['phaseVoltage'][2] + data['phaseVoltage'][0] < configTotalMinPower) ||
+          (data['phaseVoltage'][0] < configAPower || data['phaseVoltage'][1] < configBPower || data['phaseVoltage'][2] < configCPower)
+        ) {
+          return false
         } else {
-          return false;
+          return true
         }
       },
       function filterFive(data) {
-        if (data.f > conf.pre.params[conf.defs.preVoltageBalanceCheck][0]) {
-          return true;
+        let maxVol = Math.max(...data['phaseVoltage']) 
+        let minVol = Math.max(...data['phaseVoltage'])
+        const limit = conf.pre.params[conf.defs.preVoltageBalanceCheck][0]
+        if ((maxVol - minVol) > maxVol * limit) {
+          return false
         } else {
-          return false;
+          return true
         }
       },
       function filterSix(data) {
-        if (data.g > conf.pre.params[conf.defs.preVoltageBalanceCheck][0]) {
-          return true;
-        } else {
+        let maxVol = Math.max(...data['phaseCurrent']) 
+        let minVol = Math.max(...data['phaseCurrent'])
+        const limit = conf.pre.params[conf.defs.preCurrentBalanceCheck][0]
+        if ((maxVol - minVol) > maxVol * limit) {
           return false;
+        } else {
+          return true;
         }
       },
       function filterSeven(data) {
@@ -88,22 +104,22 @@ class Algorithm extends Component {
     return true;
   };
 
-  // onDataFilter = () => {
-  //   const { conf } = this.props;
-  //   let finalResult = [];
-  //   let removedResult = [];
-  //   for (let i = 0; i < conf.filters.dataList.length; i++) {
-  //     let reuslt = this.onPreFilter(conf.filters.dataList[i]);
-  //     if (reuslt) {
-  //       finalResult.push(conf.filters.dataList[i]);
-  //     } else {
-  //       removedResult.push(conf.filters.dataList[i]);
-  //     }
-  //   }
+  onDataFilter = () => {
+    const { conf } = this.props;
+    let finalResult = [];
+    let removedResult = [];
+    for (let i = 0; i < conf.filters.dataList.length; i++) {
+      let reuslt = this.onPreFilter(conf.filters.dataList[i]);
+      if (reuslt) {
+        finalResult.push(conf.filters.dataList[i]);
+      } else {
+        removedResult.push(conf.filters.dataList[i]);
+      }
+    }
 
-  //   console.log('finalResult: ', finalResult);
-  //   console.log('removedResult: ', removedResult);
-  // };
+    console.log('finalResult: ', finalResult);
+    console.log('removedResult: ', removedResult);
+  };
 
   render() {
     return (
