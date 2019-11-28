@@ -124,10 +124,25 @@ class Algorithm extends Component {
     console.log('removedResult: ', removedResult);
   };
 
+  onMerge = () => {
+    const { conf } = this.props;
+    let basicDataList = conf.filters.basicDataList
+    let sg186DataList = conf.filters.sg186DataList
+    for(let i = 0; i < basicDataList.length; i++) {
+      for(let j = 0; j < sg186DataList.length; j++) {
+        basicDataList[i] = {
+          ...basicDataList[i],
+          ...sg186DataList[j]
+        }
+      }
+    }
+    console.log(basicDataList, "lalala")
+  }
+
   render() {
     return (
       <div className={styles.main}>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={this.onMerge}>
           开始计算
         </Button>
       </div>

@@ -74,19 +74,17 @@ const FilterModel = {
           phaseReactivePower: [0.0809, 0, -0.0391],
         }
       ],
-      sg186Keys: [
-        {
-          userID: "用户编号",
-          lineName: "线路名称",
-          assetNumber: "资产编号",
-          factoryNumber: "出厂编号",
-          comprehensiveRatio: "综合倍率",
-          transformerCapacity: "变压器容量",
-          modeOfConnection: "接线方式",
-          voltage: "电压",
-          calibrationCurrent: "标定电流"
-        }
-      ],
+      sg186Keys: {
+        userID: "用户编号",
+        lineName: "线路名称",
+        assetNumber: "资产编号",
+        factoryNumber: "出厂编号",
+        comprehensiveRatio: "综合倍率",
+        transformerCapacity: "变压器容量",
+        modeOfConnection: "接线方式",
+        voltage: "电压",
+        calibrationCurrent: "标定电流"
+      },
       sg186DataList: [{
         userID: "0370427661",
         lineName: "试验线514",
@@ -135,6 +133,20 @@ const FilterModel = {
         payload: payload,
       });
     },
+
+    *filterBasicDataChanged({ payload }, { put }) {
+      yield put({
+        type: 'rebuildBasicData',
+        payload: payload,
+      })
+    },
+
+    *filterSG186DataChanged({ payload }, { put }) {
+      yield put({
+        type: 'rebuildSG186Data',
+        payload: payload,
+      })
+    }
   },
   reducers: {
     rebuildFilterSelected(state, { payload }) {
@@ -182,6 +194,36 @@ const FilterModel = {
         },
       };
     },
+
+    rebuildBasicData(state, { payload }) {
+      let { value } = payload;
+      let basicDataList = state.filters.basicDataList;
+
+      basicDataList = value
+
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          basicDataList: basicDataList,
+        }
+      }
+    },
+
+    rebuildSG186Data(state, { payload }) {
+      let { value } = payload;
+      let sg186DataList = state.filters.sg186DataList;
+
+      sg186DataList = value
+
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          sg186DataList: sg186DataList,
+        }
+      }
+    }
   },
 };
 
