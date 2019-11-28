@@ -36,9 +36,28 @@ const FilterModel = {
       ],
     },
     filters: {
-      dataList: [
+      basicKeys: [
         {
-          station: "供电公司",
+          station: "所",
+          userType: "用户类型",
+          userID: "用户编号",
+          userName: "用户名称",
+          meteredAssetNumber: "表计资产号",
+          dataDate: "数据日期",
+          CT: "CT",
+          PT: "PT",
+          phaseVoltage: ["A相电压", "B相电压", "C相电压"],
+          phaseCurrent: ["A相电流", "B相电流", "C相电流"],
+          zeroSequenceCurrent: "零序电流",
+          effectivePower: "有功功率",
+          phaseEffectivePower: ["A相有功功率", "B相有功功率", "C相有功功率"],
+          reactivePower: "无功功率",
+          phaseReactivePower: ["A相无功功率", "B相无功功率", "C相无功功率"],
+        }
+      ],
+      basicDataList: [
+        {
+          station: "试验县供电公司",
           userType: "专变",
           userID: "0378255342",
           userName: "用户13",
@@ -52,9 +71,33 @@ const FilterModel = {
           effectivePower: 2.5612,
           phaseEffectivePower: [0.0906, 0, 0.1196],
           reactivePower: 0.0809,
-          phaseReactivePower: [0.0809, 0, -0.0391]
+          phaseReactivePower: [0.0809, 0, -0.0391],
         }
       ],
+      sg186Keys: [
+        {
+          userID: "用户编号",
+          lineName: "线路名称",
+          assetNumber: "资产编号",
+          factoryNumber: "出厂编号",
+          comprehensiveRatio: "综合倍率",
+          transformerCapacity: "变压器容量",
+          modeOfConnection: "接线方式",
+          voltage: "电压",
+          calibrationCurrent: "标定电流"
+        }
+      ],
+      sg186DataList: [{
+        userID: "0370427661",
+        lineName: "试验线514",
+        assetNumber: "1330001000080006026766",
+        factoryNumber: "00008000602676",
+        comprehensiveRatio: 80,
+        transformerCapacity: 315,
+        modeOfConnection: "三相四线",
+        voltage: 230,
+        calibrationCurrent: 1.5
+      }],
       preFilterResult: id => {
         return [
           '有功无功检查',
