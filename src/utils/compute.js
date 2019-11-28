@@ -105,7 +105,6 @@ const correctPowerAWith3P4L = (data, args) => {
     correctPowerA[2] = data[args[1]][0] * data[args[2]][2] * Math.cos(data[args[3]][2])
   }
 
-  console.log(correctPowerA)
   return correctPowerA
 }
 
@@ -133,7 +132,6 @@ const correctPowerBWith3P4L = (data, args) => {
     }
   }
 
-  console.log(correctPowerB)
   return correctPowerB
 }
 
@@ -161,7 +159,6 @@ const correctPowerCWith3P4L = (data, args) => {
     }
   }
 
-  console.log(correctPowerC)
   return correctPowerC
 }
 
@@ -233,7 +230,6 @@ const correctPowerAWith3P3L = (data, args) => {
     }
   }
 
-  console.log(correctPowerA)
   return correctPowerA
 }
 
@@ -302,8 +298,6 @@ const correctPowerBWith3P3L = (data, args) => {
       }
     }
   }
-
-  console.log(correctPowerB)
 }
 
 export const compute = {
