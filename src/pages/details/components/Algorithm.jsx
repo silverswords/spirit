@@ -58,6 +58,7 @@ class Algorithm extends Component {
           return true
         }
       },
+      // todo
       function filterFive(data) {
         let maxVol = Math.max(...data['phaseVoltage']) 
         let minVol = Math.max(...data['phaseVoltage'])
@@ -68,6 +69,7 @@ class Algorithm extends Component {
           return true
         }
       },
+      // todo
       function filterSix(data) {
         let maxVol = Math.max(...data['phaseCurrent']) 
         let minVol = Math.max(...data['phaseCurrent'])
@@ -78,6 +80,7 @@ class Algorithm extends Component {
           return true;
         }
       },
+      // todo
       function filterSeven(data) {
         if (
           data.h > conf.pre.params[conf.defs.preLoadStableCheck][0] &&
