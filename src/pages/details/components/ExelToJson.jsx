@@ -37,7 +37,14 @@ class ExelToJson extends Component {
           if(basicDataKeys[basicDataListKeys[j]] instanceof Array) {
             basicDataList[i][basicDataListKeys[j]] = [1 * data[i][basicDataKeys[basicDataListKeys[j]][0]], 1 * data[i][basicDataKeys[basicDataListKeys[j]][1]], 1 * data[i][basicDataKeys[basicDataListKeys[j]][2]]]
           } else {
-            basicDataList[i][basicDataListKeys[j]] = data[i][basicDataKeys[basicDataListKeys[j]]]
+            if(basicDataListKeys[j] === "zeroSequenceCurrent"
+            || basicDataListKeys[j] === "effectivePower"
+            || basicDataListKeys[j] === "reactivePower"
+            ) {
+              basicDataList[i][basicDataListKeys[j]] = 1 * data[i][basicDataKeys[basicDataListKeys[j]]]
+            } else {
+              basicDataList[i][basicDataListKeys[j]] = data[i][basicDataKeys[basicDataListKeys[j]]]
+            }
           }
         }
       }
@@ -75,6 +82,7 @@ class ExelToJson extends Component {
       let sg186DataList = []
       for(let i = 0; i < data.length; i++) {
         sg186DataList[i] = {}
+        // make data keys from Chinese to English
         for(let j = 0; j < sg186DataListKeys.length; j++) {
           sg186DataList[i][sg186DataListKeys[j]] = data[i][dataKeys[sg186DataListKeys[j]]]
         }

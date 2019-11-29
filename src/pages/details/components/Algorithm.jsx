@@ -131,19 +131,14 @@ class Algorithm extends Component {
     let basicKeys = Object.keys(conf.filters.basicKeys)
     let sg186Keys = Object.keys(conf.filters.sg186Keys)
     let mergeDataList = []
-    let mergeKeys = {...basicKeys, ...sg186Keys}
-    for(let i = 0; i < sg186DataList.length; i++) {
-      for(let j = 0; j < basicDataList.length; j++) {
-        if(basicDataList[j][basicKeys[2]] === sg186DataList[i][sg186Keys[0]]) {
-          mergeDataList[mergeDataList.length] = {
-            ...basicDataList[j],
-            ...sg186DataList[i]
-          }
-        } else {
-          for(let k = 0; k < mergeKeys.length; k++) {
-            mergeDataList[basicDataList.length][mergeKeys[k]] = sg186DataList[i][sg186Keys[k]]
-          }
-        }
+    for(let i = 0; i < basicDataList.length; i++) {
+      for(let j = 0; j < sg186DataList.length; j++) {
+        if(basicDataList[i][basicKeys[2]] === sg186DataList[j][sg186Keys[0]]) {
+          mergeDataList.push({
+            ...basicDataList[i],
+            ...sg186DataList[j]
+          })
+        } 
       }
     }
     dispatch({

@@ -89,8 +89,8 @@ const FilterModel = {
         comprehensiveRatio: 80,
         transformerCapacity: 315,
         modeOfConnection: "三相四线",
-        voltage: 230,
-        calibrationCurrent: 1.5
+        voltage: "3x100V",
+        calibrationCurrent: "1.5(6)A"
       }],
       mergeDataList: [],
       preFilterResult: id => {
