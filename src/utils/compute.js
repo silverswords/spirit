@@ -1,17 +1,19 @@
 // 各元件基本角度
 // args = [phaseEffectivePower, phaseReactivePower]
 const basicAngle = (data, args) => {
+  data['elementsBasicAngle'] = []
   for (let i = 0; i < data[args[0]].length; i++) {
     data['elementsBasicAngle'][i] = +(Math.acos(
       Math.abs(data[args[0]][i]) /
       Math.sqrt(data[args[0]][i] * data[args[0]][i] + data[args[1]][i] * data[args[1]][i])
-    ) * 180.0 / Math.PI).toFixed(4)
+    ) * 180.0 / Math.PI).toFixed(4) 
   }
 }
 
 // 各元件真实角度（电流滞后于电压的角度）
 // args = ['phaseEffectivePower', 'phaseReactivePower', 'elementsBasicAngle']
 const realAngle = (data, args) => {
+  data['elementsRealAngle'] = []
   for (let i = 0; i < data[args[0]].length; i++) {
     if (data[args[0]][i] > 0 && data[args[1]][i] > 0) {
       data['elementsRealAngle'][i] = data[args[2]][i]
@@ -28,6 +30,7 @@ const realAngle = (data, args) => {
 // 各元件电压滞后于 A 相电压的角度
 // args = ['lineMode', 'phaseSeq']
 const lagAngle = (data, args) => {
+  data['elementsVoltageLagAngle'] = []
   if (data[args[0]] === 0 && data[args[1]] === 0) {
     data['elementsVoltageLagAngle'].push(0.0, 120.0, 240.0)
   } else if (data[args[0]] === 0 && data[args[1]] === 1) {
@@ -44,6 +47,7 @@ const lagAngle = (data, args) => {
 // 各元件电流滞后于 A 相电压的角度
 // args = ['elementsVoltageLagAngle', 'elementsRealAngle']
 const elecCurrent = (data, args) => {
+  data['elementsCurrentLagAngle'] = []
   for (let i = 0; i < data[args[0]].length; i++) {
     data['elementsCurrentLagAngle'][i] = (data[args[1]][i] + data[args[0]][i]) % 360
   }
@@ -51,13 +55,14 @@ const elecCurrent = (data, args) => {
 
 // 计算接入方式
 // args = ['elementsCurrentLagAngle']
-const accessMethod = (data, args) => {
+const accessMethod = (data, config, args) => {
+  data['elementsAccessMethods'] = []
   const lagSequence = ['+la', '-lc', '+lb', '-la', '+lc', '-lb']
   for (let i = 0; i < data[args[0]].length; i++) {
-    if (data[args[0]][i] >= defs.currentADelayAngle) {
-      data['elementsAccessMethods'][i] = lagSequence[parseInt((data[args[0]][i] - defs.currentADelayAngle) / 60)]
+    if (data[args[0]][i] >= config.currentADelayAngle) {
+      data['elementsAccessMethods'][i] = lagSequence[parseInt((data[args[0]][i] - config.currentADelayAngle) / 60)]
     } else {
-      data['elementsAccessMethods'][i] = lagSequence[parseInt((data[args[0]][i] + 360 - defs.currentADelayAngle) / 60)]
+      data['elementsAccessMethods'][i] = lagSequence[parseInt((data[args[0]][i] + 360 - config.currentADelayAngle) / 60)]
     }
   }
 }
@@ -300,12 +305,24 @@ const correctPowerBWith3P3L = (data, args) => {
   }
 }
 
-export const compute = {
-  basicAngle,
-  realAngle,
-  lagAngle,
-  elecCurrent,
-  accessMethod,
+const computeTotal = (data, config) => {
+  if (data.modeOfConnection === '三相三线') {
+    data.lineMode = 1
+    data.phaseSeq = 0
+  } else {
+    data.lineMode = 0
+    data.phaseSeq = 0
+  }
+  
+  basicAngle(data, ['phaseEffectivePower', 'phaseReactivePower'])
+  realAngle(data, ['phaseEffectivePower', 'phaseReactivePower', 'elementsBasicAngle'])
+  lagAngle(data, ['lineMode', 'phaseSeq'])
+  elecCurrent(data, ['elementsVoltageLagAngle', 'elementsRealAngle'])
+  accessMethod(data, config, ['elementsCurrentLagAngle'])
+}
+
+const methods = {
+  computeTotal,
   isNotBalance,
   isNotAccessRight,
   correctPowerAWith3P4L,
@@ -314,6 +331,8 @@ export const compute = {
   correctPowerAWith3P3L,
   correctPowerBWith3P3L
 }
+
+export default methods
 
 // basicAngle(data, ['phaseEffectivePower', 'phaseReactivePower'])
 // realAngle(data, ['phaseEffectivePower', 'phaseReactivePower', 'elementsBasicAngle'])

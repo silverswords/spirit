@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { connect } from 'dva';
 import styles from './algorithm.less';
+import methods from '@/utils/compute.js'
 
-@connect(({ filter }) => ({
-  conf: filter,
+@connect(({ filter, configuration }) => ({
+  conf: filter, globalConfig: configuration
 }))
 class Algorithm extends Component {
   onPreFilter = data => {
@@ -119,40 +120,22 @@ class Algorithm extends Component {
         removedResult.push(conf.filters.dataList[i]);
       }
     }
-
-    console.log('finalResult: ', finalResult);
-    console.log('removedResult: ', removedResult);
   };
 
   onMerge = () => {
-    const { conf, dispatch } = this.props;
+    const { conf, globalConfig } = this.props;
     let basicDataList = conf.filters.basicDataList
     let sg186DataList = conf.filters.sg186DataList
-    let basicKeys = Object.keys(conf.filters.basicKeys)
-    let sg186Keys = Object.keys(conf.filters.sg186Keys)
-    let mergeDataList = []
-    let mergeKeys = {...basicKeys, ...sg186Keys}
-    for(let i = 0; i < sg186DataList.length; i++) {
-      for(let j = 0; j < basicDataList.length; j++) {
-        if(basicDataList[j][basicKeys[2]] === sg186DataList[i][sg186Keys[0]]) {
-          mergeDataList[mergeDataList.length] = {
-            ...basicDataList[j],
-            ...sg186DataList[i]
-          }
-        } else {
-          for(let k = 0; k < mergeKeys.length; k++) {
-            mergeDataList[basicDataList.length][mergeKeys[k]] = sg186DataList[i][sg186Keys[k]]
-          }
-        }
+    for(let i = 0; i < basicDataList.length; i++) {
+      for(let j = 0; j < sg186DataList.length; j++) {
+        basicDataList[i] = {
+          ...basicDataList[i],
+          ...sg186DataList[j]
+        } 
       }
+      methods.computeTotal(basicDataList[i], globalConfig.global)
     }
-    dispatch({
-      type: 'filter/filterMergeDataChanged',
-      payload: {
-        value: mergeDataList
-      }
-    })
-    console.log(mergeDataList, "mergeDataList")
+    console.log(basicDataList)
   }
 
   render() {
