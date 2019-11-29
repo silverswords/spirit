@@ -41,7 +41,6 @@ class ExelToJson extends Component {
           }
         }
       }
-      console.log(basicDataList, "basicDataList")
       dispatch({
         type: 'filter/filterBasicDataChanged',
         payload: {
@@ -79,7 +78,6 @@ class ExelToJson extends Component {
           sg186DataList[i][sg186DataListKeys[j]] = data[i][dataKeys[sg186DataListKeys[j]]]
         }
       }
-      console.log(sg186DataList, "sg186DataList")
       dispatch({
         type: 'filter/filterSG186DataChanged',
         payload: {
