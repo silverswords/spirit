@@ -28,8 +28,8 @@ class ExelToJson extends Component {
         message.error('文件类型不正确！');
       }
 
-      let basicDataListKeys = Object.keys(conf.filters.basicKeys[0]) // 英文 keys 数组
-      let basicDataKeys = conf.filters.basicKeys[0] // 中文 keys
+      let basicDataListKeys = Object.keys(conf.filters.basicKeys) // 英文 keys 数组
+      let basicDataKeys = conf.filters.basicKeys // 中文 keys
       let basicDataList = []
       for(let i = 0; i < data.length; i++) {
         basicDataList[i] = {}
@@ -41,6 +41,7 @@ class ExelToJson extends Component {
           }
         }
       }
+      console.log(basicDataList, "basicDataList")
       dispatch({
         type: 'filter/filterBasicDataChanged',
         payload: {
@@ -78,6 +79,7 @@ class ExelToJson extends Component {
           sg186DataList[i][sg186DataListKeys[j]] = data[i][dataKeys[sg186DataListKeys[j]]]
         }
       }
+      console.log(sg186DataList, "sg186DataList")
       dispatch({
         type: 'filter/filterSG186DataChanged',
         payload: {
