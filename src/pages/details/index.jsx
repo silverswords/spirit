@@ -6,7 +6,6 @@ import Global from './components/Global';
 import Filter from './components/Filter';
 import PostFilter from './components/PostFilter';
 import ExelToJson from './components/Result';
-import Algorithm from './components/Algorithm';
 import styles from './style.less';
 
 class Details extends Component {
@@ -41,9 +40,6 @@ class Details extends Component {
               计算结果
             </Button>
           </Col>
-          {/* <Col span={2}>
-            <Algorithm />
-          </Col> */}
           <Col span={20}>
             <Button type="primary" size="large" onClick={this.back}>
               返回

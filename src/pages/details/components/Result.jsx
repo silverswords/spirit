@@ -101,9 +101,16 @@ class Result extends Component {
 
     console.log(resultList)
     dispatch({
-      type: 'filter/filterMergeDataChanged',
+      type: 'compute/computeResultDataChanged',
       payload: {
         value: resultList,
+      },
+    });
+
+    dispatch({
+      type: 'compute/computeRemoveDataChanged',
+      payload: {
+        value: removedList,
       },
     });
   };

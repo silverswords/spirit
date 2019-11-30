@@ -36,7 +36,6 @@ const FilterModel = {
       ],
     },
     filters: {
-      mergeDataList: [],
       preFilterResult: id => {
         return [
           '有功无功检查',
@@ -73,13 +72,6 @@ const FilterModel = {
         type: 'rebuildPostCurrentPhase',
         payload: payload,
       });
-    },
-
-    *filterMergeDataChanged({ payload }, { put }) {
-      yield put({
-        type: 'rebuildMergeData',
-        payload: payload,
-      })
     }
   },
   reducers: {
@@ -129,21 +121,6 @@ const FilterModel = {
       };
     }
   },
-
-  rebuildMergeData(state, { payload }) {
-    let { value } = payload;
-    let mergeDataList = state.filters.mergeDataList;
-
-    mergeDataList = value
-
-    return {
-      ...state,
-      filters: {
-        ...state.filters,
-        mergeDataList: mergeDataList,
-      }
-    }
-  }
 };
 
 export default FilterModel;
