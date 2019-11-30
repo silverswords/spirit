@@ -38,14 +38,14 @@ const mapKeysNumber = (data, args, transformDataList) => {
 };
 
 // 接收 mergeDataList 的数据，返回 映射完成的 transformDataList 数据。
-const transformFormat = (data, transformDataList) => {
-  //遍历每一条数据
-  for (let i = 0; i < data.length; i++) {
-    // 转换操作 , mergeDataList[i] 访问到第 i 条数据，
-    // 他的里面包括 “零序电流：2” 这样的键值对
-    transformDataList[i] = {};
-    mapKeysNumber(data, i, transformDataList);
-  }
-};
+// const transformFormat = (data, transformDataList) => {
+//   //遍历每一条数据
+//   for (let i = 0; i < data.length; i++) {
+//     // 转换操作 , mergeDataList[i] 访问到第 i 条数据，
+//     // 他的里面包括 “零序电流：2” 这样的键值对
+//     transformDataList[i] = {};
+//     mapKeysNumber(data, i, transformDataList);
+//   }
+// };
 
-export default transformFormat;
+export default mapKeysNumber;
