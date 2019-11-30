@@ -4,9 +4,12 @@ import XLSX from 'xlsx';
 import { connect } from 'dva';
 import styles from './result.less';
 import transformDataListKeys from '@/utils/transform.js';
+import preFilter from '@/utils/preFilter'
+import postFilter from '@/utils/postFilter'
+import compose from '@/utils/compute'
 
-@connect(({ filter }) => ({
-  conf: filter,
+@connect(({ filter, configuration }) => ({
+  conf: filter,  globalConf: configuration
 }))
 class Result extends Component {
   constructor(props) {
@@ -64,11 +67,13 @@ class Result extends Component {
   };
 
   onMerge = () => {
-    const { dispatch } = this.props;
+    const { dispatch, conf, globalConf } = this.props;
     let basicDataList = this.state.basicDataList;
     let sg186DataList = this.state.sg186DataList;
-    let transformDataList = [];
+    let resultList = [];
+    let removedList = [];
     let mergeDataList = [];
+
     for (let i = 0; i < basicDataList.length; i++) {
       for (let j = 0; j < sg186DataList.length; j++) {
         if (basicDataList[i]['用户编号'] === sg186DataList[j]['用户编号']) {
@@ -80,19 +85,25 @@ class Result extends Component {
       }
     }
 
-    console.log(mergeDataList, 'data');
-    let data
     for (let i = 0; i < mergeDataList.length; i++) {
-      // 转换操作 , mergeDataList[i] 访问到第 i 条数据，
-      // 他的里面包括 “零序电流：2” 这样的键值对
-      data = transformDataListKeys(mergeDataList[i]);
-      console.log(data, 'transformData');
+      let data = transformDataListKeys(mergeDataList[i]);
+      if (preFilter(data, conf)) {
+        compose.computeTotal(data, globalConf.global)
+        if (postFilter(data, conf)) {
+          resultList.push(data)
+        } else {
+          removedList.push(data)
+        }
+      } else {
+        removedList.push(data)
+      }
     }
 
+    console.log(resultList)
     dispatch({
       type: 'filter/filterMergeDataChanged',
       payload: {
-        value: mergeDataList,
+        value: resultList,
       },
     });
   };
