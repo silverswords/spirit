@@ -100,17 +100,11 @@ class Result extends Component {
     }
 
     console.log(resultList)
+    let listData = {resultList, removedList}
     dispatch({
       type: 'compute/computeResultDataChanged',
       payload: {
-        value: resultList,
-      },
-    });
-
-    dispatch({
-      type: 'compute/computeRemoveDataChanged',
-      payload: {
-        value: removedList,
+        value: listData
       },
     });
   };

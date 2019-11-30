@@ -13,43 +13,26 @@ const ComputeModel = {
         payload: payload,
       })
     },
-    *computeRemoveDataChanged({ payload }, { put }) {
-      yield put({
-        type: 'rebuildRemoveData',
-        payload: payload,
-      })
-    }
   },
   reducers: {
     rebuildResultData(state, { payload }) {
       let { value } = payload;
       let resultDataList = state.compute.resultDataList;
+      let removeDataList = state.compute.removeDataList;
   
-      resultDataList = value
+      resultDataList = value.resultList
+      removeDataList = value.removedList
   
       return {
         ...state,
-        filters: {
+        compute: {
           ...state.compute,
-          mergeDataList: resultDataList,
+          resultDataList: resultDataList,
+          removeDataList: removeDataList
         }
       }
     }
   },
-  rebuildRemoveData(state, { payload }) {
-    let { value } = payload;
-    let removeDataList = state.compute.removeDataList;
-
-    removeDataList = value
-
-    return {
-      ...state,
-      filters: {
-        ...state.compute,
-        removeDataList: removeDataList,
-      }
-    }
-  }
 };
 
 export default ComputeModel;
