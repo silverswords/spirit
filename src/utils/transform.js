@@ -36,23 +36,23 @@ const mapKeysNumber = (data, margs) => {
   }
 }
 
-function getExactTime(time) {
-  var date = new Date(time);
-  var date = new Date(time* 1000);
-  var year = date.getFullYear() + '-';
-  var month = (date.getMonth()+1 < 10 ? '0' + (date.getMonth()+1) : date.getMonth()+1) + '-';
-  var dates = date.getDate() + ' ';
-  var hour = date.getHours() + ':';
-  var min = date.getMinutes() + ':';
-  var second = date.getSeconds();
-  return year + month + dates + hour + min + second ;
+function formatDate(numb) {
+  let time = new Date((numb - 1) * 24 * 3600000 + 1)
+  time.setFullYear(time.getFullYear() - 70)
+  let year = time.getFullYear() + '-'
+  let month = time.getMonth() + 1 + '-'
+  let date = time.getDate() - 1 + ' '
+  let hour = (time.getHours() < 10 ? '0' + (time.getHours()) : time.getHours()) + ':'
+  let minute = (time.getMinutes() < 10 ? '0' + (time.getMinutes()) : time.getMinutes()) + ':'
+  let seconds = (time.getSeconds() < 10 ? '0' + (time.getSeconds()) : time.getSeconds());
+  return year + month + date + hour + minute + seconds;
 }
 
 // 更改需要转换日期的列
 const mapKeysDate = (data, margs) => {
   let IfConvert = Map[mapKeysArray[margs]];
   if (Object.keys(data)[margs] === '数据日期') {
-    transformData[IfConvert[0]] = getExactTime(data[mapKeysArray[margs]])
+    transformData[IfConvert[0]] = data[mapKeysArray[margs]]
   } else {
     // 不需要转换
     transformData[IfConvert[0]] = data[mapKeysArray[margs]];
