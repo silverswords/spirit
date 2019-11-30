@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { connect } from 'dva';
 import styles from './algorithm.less';
 import methods from '@/utils/compute.js';
+import transformFile from '@/utils/transform.js'
 
 @connect(({ filter, configuration }) => ({
   conf: filter,
@@ -127,40 +128,12 @@ class Algorithm extends Component {
     }
   };
 
-  onMerge = () => {
-    const { conf, dispatch, globalConfig } = this.props;
-    let basicDataList = conf.filters.basicDataList;
-    let sg186DataList = conf.filters.sg186DataList;
-    let basicKeys = Object.keys(conf.filters.basicKeys);
-    let sg186Keys = Object.keys(conf.filters.sg186Keys);
-    let mergeDataList = [];
-    for (let i = 0; i < basicDataList.length; i++) {
-      for (let j = 0; j < sg186DataList.length; j++) {
-        if (basicDataList[i][basicKeys[2]] === sg186DataList[j][sg186Keys[0]]) {
-          mergeDataList.push({
-            ...basicDataList[i],
-            ...sg186DataList[j],
-          });
-        }
-      }
-    }
-
-    dispatch({
-      type: 'filter/filterMergeDataChanged',
-      payload: {
-        value: mergeDataList,
-      },
-    });
-
-    console.log(basicDataList);
-  };
-
   render() {
     return (
       <div className={styles.main}>
-        <Button type="primary" size="large" onClick={this.onMerge}>
+        {/* <Button type="primary" size="large" onClick={this.onMerge}>
           开始计算
-        </Button>
+        </Button> */}
       </div>
     );
   }
