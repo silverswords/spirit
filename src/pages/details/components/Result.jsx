@@ -3,7 +3,7 @@ import { Upload, Button, Icon, message, Col } from 'antd';
 import XLSX from 'xlsx';
 import { connect } from 'dva';
 import styles from './result.less';
-import mapKeysNumber from '@/utils/transform.js';
+import transformDataListKeys from '@/utils/transform.js';
 
 @connect(({ filter }) => ({
   conf: filter,
@@ -81,15 +81,13 @@ class Result extends Component {
     }
 
     console.log(mergeDataList, 'data');
-
-    // mergeDataList 通过自定操作 transformFormat 转换到 transformDataList 中
+    let data
     for (let i = 0; i < mergeDataList.length; i++) {
       // 转换操作 , mergeDataList[i] 访问到第 i 条数据，
       // 他的里面包括 “零序电流：2” 这样的键值对
-      transformDataList[i] = {};
-      mapKeysNumber(mergeDataList, i, transformDataList);
+      data = transformDataListKeys(mergeDataList[i]);
+      console.log(data, 'transformData');
     }
-    console.log(transformDataList, 'transformDataList');
 
     dispatch({
       type: 'filter/filterMergeDataChanged',

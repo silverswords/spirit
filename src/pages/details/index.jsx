@@ -32,7 +32,7 @@ class Details extends Component {
             <PostFilter />
           </Col>
           <Col span={24}>
-            <Card title="上传文件">
+            <Card title="上传文件并计算">
               <ExelToJson />
             </Card>
           </Col>
