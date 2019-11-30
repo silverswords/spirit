@@ -8,8 +8,8 @@ import preFilter from '@/utils/preFilter'
 import postFilter from '@/utils/postFilter'
 import compose from '@/utils/compute'
 
-@connect(({ filter, configuration }) => ({
-  conf: filter,  globalConf: configuration
+@connect(({ filter, compute, configuration }) => ({
+  conf: filter,  globalConf: configuration, com: compute
 }))
 class Result extends Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class Result extends Component {
   };
 
   onMerge = () => {
-    const { dispatch, conf, globalConf } = this.props;
+    const { dispatch, conf, globalConf, com } = this.props;
     let basicDataList = this.state.basicDataList;
     let sg186DataList = this.state.sg186DataList;
     let resultList = [];
@@ -99,8 +99,7 @@ class Result extends Component {
       }
     }
 
-    console.log(resultList)
-    let listData = {resultList, removedList}
+    let listData = { resultList, removedList }
     dispatch({
       type: 'compute/computeResultDataChanged',
       payload: {
