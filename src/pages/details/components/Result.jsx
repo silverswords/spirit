@@ -27,10 +27,10 @@ class Result extends Component {
     reader.onload = event => {
       try {
         const { result } = event.target;
-        const workbook = XLSX.read(result, { type: 'binary', cellDates:true, cellNF: false, cellText: false  });
+        const workbook = XLSX.read(result, { type: 'binary', cellDates: true });
         for (const sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
-            data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {dateNF: "YYYY-MM-DD HH:MM:SS"}));
+            data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {raw: false}));
           }
         }
         message.success('上传成功！');

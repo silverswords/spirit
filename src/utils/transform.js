@@ -24,35 +24,14 @@ const arrayPush = (data, margs) => {
 
 // 更改需要转换为数字的列
 const mapKeysNumber = (data, margs) => {
+  let IfConvert = Map[mapKeysArray[margs]];
   if (
     Object.keys(data)[margs] === '零序电流' ||
     Object.keys(data)[margs] === '有功功率' ||
     Object.keys(data)[margs] === '无功功率'
   ) {
-    transformData[Map[mapKeysArray[margs]][0]] = 1 * data[mapKeysArray[margs]];
+    transformData[IfConvert[0]] = 1 * data[mapKeysArray[margs]];
     return margs
-  } else {
-    mapKeysDate(data, margs)
-  }
-}
-
-function formatDate(numb) {
-  let time = new Date((numb - 1) * 24 * 3600000 + 1)
-  time.setFullYear(time.getFullYear() - 70)
-  let year = time.getFullYear() + '-'
-  let month = time.getMonth() + 1 + '-'
-  let date = time.getDate() - 1 + ' '
-  let hour = (time.getHours() < 10 ? '0' + (time.getHours()) : time.getHours()) + ':'
-  let minute = (time.getMinutes() < 10 ? '0' + (time.getMinutes()) : time.getMinutes()) + ':'
-  let seconds = (time.getSeconds() < 10 ? '0' + (time.getSeconds()) : time.getSeconds());
-  return year + month + date + hour + minute + seconds;
-}
-
-// 更改需要转换日期的列
-const mapKeysDate = (data, margs) => {
-  let IfConvert = Map[mapKeysArray[margs]];
-  if (Object.keys(data)[margs] === '数据日期') {
-    transformData[IfConvert[0]] = data[mapKeysArray[margs]]
   } else {
     // 不需要转换
     transformData[IfConvert[0]] = data[mapKeysArray[margs]];
