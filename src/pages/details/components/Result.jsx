@@ -3,7 +3,6 @@ import { Upload, Button, Icon, message, Col } from 'antd';
 import XLSX from 'xlsx';
 import { connect } from 'dva';
 import styles from './result.less';
-import Map from '@/utils/map.js';
 import transformFormat from '@/utils/transform.js';
 
 @connect(({ filter }) => ({

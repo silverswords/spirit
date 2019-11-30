@@ -36,34 +36,6 @@ const FilterModel = {
       ],
     },
     filters: {
-      basicDataList: [{
-        station: "试验县供电公司",
-        userType: "专变",
-        userID: "0378255342",
-        userName: "用户13",
-        meteredAssetNumber: "1330001000080016500755",
-        dataDate: "2019-8-20 00:00:00",
-        CT: 10,
-        PT: 100,
-        phaseVoltage: [104.7, 0, 105],
-        phaseCurrent: [1.191, 0, 1.247],
-        zeroSequenceCurrent: 0,
-        effectivePower: 2.5612,
-        phaseEffectivePower: [0.0906, 0, 0.1196],
-        reactivePower: 0.0809,
-        phaseReactivePower: [0.0809, 0, -0.0391],
-      }],
-      sg186DataList: [{
-        userID: "0370427661",
-        lineName: "试验线514",
-        assetNumber: "1330001000080006026766",
-        factoryNumber: "00008000602676",
-        comprehensiveRatio: 80,
-        transformerCapacity: 315,
-        modeOfConnection: "三相四线",
-        voltage: "3x100V",
-        calibrationCurrent: "1.5(6)A"
-      }],
       mergeDataList: [],
       preFilterResult: id => {
         return [
@@ -101,20 +73,6 @@ const FilterModel = {
         type: 'rebuildPostCurrentPhase',
         payload: payload,
       });
-    },
-
-    *filterBasicDataChanged({ payload }, { put }) {
-      yield put({
-        type: 'rebuildBasicData',
-        payload: payload,
-      })
-    },
-
-    *filterSG186DataChanged({ payload }, { put }) {
-      yield put({
-        type: 'rebuildSG186Data',
-        payload: payload,
-      })
     },
 
     *filterMergeDataChanged({ payload }, { put }) {
@@ -169,36 +127,6 @@ const FilterModel = {
           params: params,
         },
       };
-    },
-
-    rebuildBasicData(state, { payload }) {
-      let { value } = payload;
-      let basicDataList = state.filters.basicDataList;
-
-      basicDataList = value
-
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          basicDataList: basicDataList,
-        }
-      }
-    },
-
-    rebuildSG186Data(state, { payload }) {
-      let { value } = payload;
-      let sg186DataList = state.filters.sg186DataList;
-
-      sg186DataList = value
-
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          sg186DataList: sg186DataList,
-        }
-      }
     }
   },
 
