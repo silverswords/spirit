@@ -4,6 +4,7 @@ import router from 'umi/router';
 
 import Global from './components/Global';
 import Filter from './components/Filter';
+import PreFilter from './components/PreFilter.jsx'
 import PostFilter from './components/PostFilter';
 import ExelToJson from './components/Result';
 import styles from './style.less';
