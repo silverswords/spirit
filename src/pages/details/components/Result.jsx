@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Upload, Button, Icon, message, Col } from 'antd';
 import XLSX from 'xlsx';
 import { connect } from 'dva';
+import router from 'umi/router';
+
 import styles from './result.less';
 import transformDataListKeys from '@/utils/transform.js';
 import preFilter from '@/utils/preFilter'
@@ -86,22 +88,16 @@ class Result extends Component {
     }
 
     for (let i = 0; i < mergeDataList.length; i++) {
-      let data = transformDataListKeys(mergeDataList[i]);
       let result = {}
-      if (preFilter(data, conf)) {
-        compose.computeTotal(data, globalConf.global)
-        if (postFilter(data, conf)) {
-          result = {...data}
-          resultList.push(result)
-        } else {
-          removedList.push(data)
-        }
-      } else {
-        removedList.push(data)
-      }
+      
+      let data = transformDataListKeys(mergeDataList[i]);
+      preFilter(data, conf)
+      compose.computeTotal(data, globalConf.global)
+      postFilter(data, conf)
+      
+      result = {...data}
+      resultList.push(result)
     }
-
-    console.log(resultList)
 
     let listData = { resultList, removedList }
     dispatch({
@@ -110,6 +106,8 @@ class Result extends Component {
         value: listData
       },
     });
+
+    router.push('/computeResult');
   };
 
   render() {

@@ -11,7 +11,7 @@ import styles from './style.less';
 
 class Details extends Component {
   startCalculation = () => {
-    router.push('/result');
+    router.push('/computeResult');
   };
 
   back = () => {

@@ -53,7 +53,7 @@ const lagAngle = (data, args) => {
 const elecCurrent = (data, args) => {
   data['elementsCurrentLagAngle'] = [];
   for (let i = 0; i < data[args[0]].length; i++) {
-    data['elementsCurrentLagAngle'][i] = (data[args[1]][i] + data[args[0]][i]) % 360;
+    data['elementsCurrentLagAngle'][i] = ((data[args[1]][i] + data[args[0]][i]) % 360).toFixed(4);
   }
 };
 

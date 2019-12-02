@@ -92,9 +92,11 @@ const preFilter = (data, conf) => {
   for (let i = 0; i < conf.pre.preFiltersSelected.length; i++) {
     if (conf.pre.preFiltersSelected[i]) {
       if (handlers[i](data, conf)) {
+        data.isError = false
         continue;
       } else {
         data.info = `${conf.filters.preFilterResult(i)}`;
+        data.isError = true
         return false;
       }
     }

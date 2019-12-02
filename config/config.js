@@ -100,6 +100,11 @@ export default {
           path: '/result',
           component: './result',
         },
+        {
+          name: '计算结果展示',
+          path: '/computeResult',
+          component: './computeResult'
+        }
       ],
     },
   ],
