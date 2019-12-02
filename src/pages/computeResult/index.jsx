@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Input, Button, Card } from 'antd'
+import { Row, Col, Input, Button, Card, message } from 'antd'
 import { connect } from 'dva'
 import router from 'umi/router'
 
@@ -35,9 +35,14 @@ class Result extends Component {
   onSearch = (value) => {
     const { result } = this.props;
     const data = result.compute.resultDataList[value]
-    console.log(data)
+
+    if (data == undefined) {
+      message.error('该行数据不存在');
+      return false
+    }
+
     this.setState({
-      selectedData: data,
+      selectedData: data
     });
   }
 
@@ -50,7 +55,7 @@ class Result extends Component {
           </Col>
           <Col offset={1} style={{ marginTop: 20, marginBottom: 20 }} span={22}>
             <Card title="查询结果">
-              <Card type="inner" title="基础信息">
+              <Card headStyle={{backgroundColor: '#d6e4ff'}} type="inner" title="基础信息">
                 <Card.Grid style={gridStyle}>
                   <p>
                     <span style={spanStyle}>所: </span>
@@ -159,7 +164,7 @@ class Result extends Component {
                   <p>&nbsp;</p>
                 </Card.Grid>
               </Card>
-              <Card style={{ marginTop: 16 }} type="inner" title="计算数据">
+              <Card headStyle={{backgroundColor: '#ffccc7'}} style={{ marginTop: 16 }} type="inner" title="计算数据">
                 <Card.Grid style={{width: '50%'}}>
                   <p>
                     <span style={spanStyle}>真实角度: </span>
