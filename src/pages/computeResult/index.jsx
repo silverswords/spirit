@@ -45,10 +45,10 @@ class Result extends Component {
     return (
       <div>
         <Row justify="center">
-          <Col span={16}>
-            <Input.Search type='number' onSearch={this.onSearch} enterButton />
+          <Col offset={4} span={16}>
+            <Input.Search size="large" placeholder='输入想要查看的数据的行数' type='number' onSearch={this.onSearch} enterButton />
           </Col>
-          <Col style={{ marginTop: 20, marginBottom: 20 }} span={24}>
+          <Col offset={1} style={{ marginTop: 20, marginBottom: 20 }} span={22}>
             <Card title="查询结果">
               <Card type="inner" title="基础信息">
                 <Card.Grid style={gridStyle}>
@@ -195,10 +195,14 @@ class Result extends Component {
               </Card>
             </Card>
           </Col>
-          <Col span={24}>
+        </Row>
+        <Row type="flex" justify="space-around">
+          <Col style={{textAlign: 'center'}} span={4}>
             <Button type="primary" size={'large'} onClick={this.back}>
-              返回
+              返回上页
             </Button>
+          </Col>
+          <Col style={{textAlign: 'center'}} span={4}>
             <Button type="primary" size={'large'} onClick={this.toResult}>
               数据展示
             </Button>
