@@ -29,6 +29,10 @@ const realAngle = (data, args) => {
       data['elementsRealAngle'][i] = 360.0 - data[args[2]][i];
     }
   }
+
+  if (data['elementsRealAngle'][1] == undefined) {
+    data['elementsRealAngle'][1] = NaN
+  }
 };
 
 // 各元件电压滞后于 A 相电压的角度
@@ -40,9 +44,9 @@ const lagAngle = (data, args) => {
   } else if (data[args[0]] === 0 && data[args[1]] === 1) {
     data['elementsVoltageLagAngle'].push(0.0, 240.0, 120.0);
   } else if (data[args[0]] === 1 && data[args[1]] === 0) {
-    data['elementsVoltageLagAngle'].push(330.0, undefined, 270.0);
+    data['elementsVoltageLagAngle'].push(330.0, NaN, 270.0);
   } else if (data[args[0]] === 1 && data[args[1]] === 1) {
-    data['elementsVoltageLagAngle'].push(30.0, undefined, 90.0);
+    data['elementsVoltageLagAngle'].push(30.0, NaN, 90.0);
   } else {
     return 'found mistake';
   }
@@ -54,6 +58,10 @@ const elecCurrent = (data, args) => {
   data['elementsCurrentLagAngle'] = [];
   for (let i = 0; i < data[args[0]].length; i++) {
     data['elementsCurrentLagAngle'][i] = ((data[args[1]][i] + data[args[0]][i]) % 360).toFixed(4);
+  }
+
+  if (data['elementsCurrentLagAngle'][1] == undefined) {
+    data['elementsCurrentLagAngle'][1] = NaN
   }
 };
 
@@ -70,6 +78,10 @@ const accessMethod = (data, config, args) => {
       data['elementsAccessMethods'][i] =
         lagSequence[parseInt((data[args[0]][i] + 360 - config.currentADelayAngle) / 60)];
     }
+  }
+
+  if (data['elementsAccessMethods'][1] == undefined) {
+    data['elementsAccessMethods'][1] = '-'
   }
 };
 
