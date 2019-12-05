@@ -32,10 +32,12 @@ class Configuration extends Component {
           <Col span={24}>
             <PostFilter />
           </Col>
+          <Col span={2}>
+            <Button type="primary" size="large" onClick={this.startCalculation}>
+              配置详情
+            </Button>
+          </Col>
         </Row>
-        <Button type="primary" size="large" onClick={this.startCalculation}>
-          配置详情
-        </Button>
       </div>
     );
   }

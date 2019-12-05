@@ -70,25 +70,19 @@ class Filter extends Component {
     return (
       <div className={styles.filter_config}>
         <Card title='数据过滤条件设置'>
-          <Card.Grid>
-            <Card title='过滤器选择'>
-              <Card.Grid>
-                <Checkbox.Group
-                  options={checkBoxOptions}
-                  value={checkBoxValues}
-                  onChange={this.onCheckBoxChanged}
-                />
-              </Card.Grid>
-            </Card>
-          </Card.Grid>
-          <Card.Grid>
-            <Card title='过滤器参数设置'
-              tabList={labels}
-              activeTabKey={this.state.selectedFilter}
-              onTabChange={this.onFilterTabListChanged}>
-              { this.renderFilterContent() }
-            </Card>
-          </Card.Grid>
+          <Card title='过滤器选择'>
+            <Checkbox.Group
+              options={checkBoxOptions}
+              value={checkBoxValues}
+              onChange={this.onCheckBoxChanged}
+            />
+          </Card>
+          <Card title='过滤器参数设置'
+            tabList={labels}
+            activeTabKey={this.state.selectedFilter}
+            onTabChange={this.onFilterTabListChanged}>
+            { this.renderFilterContent() }
+          </Card>
         </Card>
       </div>
     );

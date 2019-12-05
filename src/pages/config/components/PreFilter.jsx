@@ -201,88 +201,82 @@ class PreFilter extends Component {
         <Row gutter={12}>
           <Col span={8}>
             <Card title="高供高计三相三线100V">
-              <Card.Grid>
-                <p>
-                  <span>
-                    一元件、三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le;
-                  </span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][0]}
-                    min={0}
-                    max={100}
-                    step={1.0}
-                    onChange={onUnderVoltageoneChange}
-                  />
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>一元件、三元件相电压和 &le;</span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][1]}
-                    min={0}
-                    step={1.0}
-                    onChange={onUnderVoltagetwoChange}
-                  />
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>&nbsp;</p>
-              </Card.Grid>
+              <p>
+                <span>
+                  一元件、三元件电压 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&le;
+                </span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][0]}
+                  min={0}
+                  max={100}
+                  step={1.0}
+                  onChange={onUnderVoltageoneChange}
+                />
+                <span className={styles.last_child}>V</span>
+              </p>
+              <p>
+                <span>一元件、三元件相电压和 &le;</span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][1]}
+                  min={0}
+                  step={1.0}
+                  onChange={onUnderVoltagetwoChange}
+                />
+                <span className={styles.last_child}>V</span>
+              </p>
+              <p>&nbsp;</p>
             </Card>
           </Col>
           <Col span={8}>
             <Card title="高供低计">
-              <Card.Grid>
-                <p>
-                  <span>一元件电压&lt;</span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][2]}
-                    min={0}
-                    step={1.0}
-                    onChange={onUnderVoltagethreeChange}
-                  />
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>二元件电压&lt;</span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][3]}
-                    min={0}
-                    step={1.0}
-                    onChange={onUnderVoltagefourChange}
-                  />
-                  <span className={styles.last_child}>V</span>
-                </p>
-                <p>
-                  <span>三元件电压&lt;</span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][4]}
-                    min={0}
-                    step={1.0}
-                    onChange={onUnderVoltagefiveChange}
-                  />
-                  <span className={styles.last_child}>V</span>
-                </p>
-              </Card.Grid>
+              <p>
+                <span>一元件电压&lt;</span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][2]}
+                  min={0}
+                  step={1.0}
+                  onChange={onUnderVoltagethreeChange}
+                />
+                <span className={styles.last_child}>V</span>
+              </p>
+              <p>
+                <span>二元件电压&lt;</span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][3]}
+                  min={0}
+                  step={1.0}
+                  onChange={onUnderVoltagefourChange}
+                />
+                <span className={styles.last_child}>V</span>
+              </p>
+              <p>
+                <span>三元件电压&lt;</span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][4]}
+                  min={0}
+                  step={1.0}
+                  onChange={onUnderVoltagefiveChange}
+                />
+                <span className={styles.last_child}>V</span>
+              </p>
             </Card>
           </Col>
           <Col span={8}>
             <Card title="高供高计且三相四线额定电压57.7V">
-              <Card.Grid>
-                <p>
-                  <span>电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
-                  <InputNumber
-                    value={conf.pre.params[conf.defs.preUnderVoltageCheck][5]}
-                    min={0}
-                    max={100}
-                    step={1.0}
-                    formatter={value => `${value}%`}
-                    parser={value => value.replace('%', '')}
-                    onChange={onUnderVoltagesixChange}
-                  />
-                </p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-              </Card.Grid>
+              <p>
+                <span>电压 &nbsp;&nbsp;&nbsp;&nbsp;&le;</span>
+                <InputNumber
+                  value={conf.pre.params[conf.defs.preUnderVoltageCheck][5]}
+                  min={0}
+                  max={100}
+                  step={1.0}
+                  formatter={value => `${value}%`}
+                  parser={value => value.replace('%', '')}
+                  onChange={onUnderVoltagesixChange}
+                />
+              </p>
+              <p>&nbsp;</p>
+              <p>&nbsp;</p>
             </Card>
           </Col>
         </Row>
@@ -437,7 +431,7 @@ class PreFilter extends Component {
     return (
       <div className={styles.prefilter}>
         <Card title={titles[type]}>
-          <Card.Grid>{this.renderPreFilter(type)}</Card.Grid>
+          {this.renderPreFilter(type)}
         </Card>
       </div>
     );

@@ -136,13 +136,13 @@ class Result extends Component {
           </Card>
         </Col>
         <Col span={2}>
-          <Button type="primary" size="large" onClick={this.onMerge}>
-            计算结果
+          <Button type="primary" size="large" onClick={this.back}>
+            返回
           </Button>
         </Col>
         <Col span={20}>
-          <Button type="primary" size="large" onClick={this.back}>
-            返回
+          <Button type="primary" size="large" onClick={this.onMerge}>
+            计算结果
           </Button>
         </Col>
       </div>

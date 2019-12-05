@@ -3,7 +3,6 @@ import { Row, Col, Input, Button, Card, message } from 'antd'
 import { connect } from 'dva'
 import router from 'umi/router'
 
-
 const spanStyle = {
   marginRight: '12px',
 }
@@ -197,13 +196,14 @@ class Result extends Component {
             </Card>
           </Col>
         </Row>
-        <Row type="flex" justify="space-around">
-          <Col style={{textAlign: 'center'}} span={4}>
+        <Row>
+          <Col span={1}></Col>
+          <Col span={2}>
             <Button type="primary" size={'large'} onClick={this.back}>
-              返回上页
+              返回
             </Button>
           </Col>
-          <Col style={{textAlign: 'center'}} span={4}>
+          <Col span={20}>
             <Button type="primary" size={'large'} onClick={this.toResult}>
               数据展示
             </Button>

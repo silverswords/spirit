@@ -95,7 +95,7 @@ class PostFilter extends Component {
     return (
       <div className={styles.postfilter}>
         <Card title={titles[type]}>
-          <Card.Grid>{this.renderPostFilter(type)}</Card.Grid>
+          {this.renderPostFilter(type)}
         </Card>
       </div>
     );

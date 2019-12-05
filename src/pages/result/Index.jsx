@@ -20,10 +20,12 @@ class Result extends Component {
           </Col>
           <Col span={24}>
             <ResultTable />
+					</Col>
+          <Col span={2}>
             <Button type="primary" size={'large'} onClick={this.back}>
               返回
             </Button>
-					</Col>
+          </Col>
         </Row>
       </div>
     );

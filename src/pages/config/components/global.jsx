@@ -33,188 +33,180 @@ class Global extends Component {
           <Row gutter={8}>
             <Col span={6}>
               <Card title="三相四线 - 正相序">
-                <Card.Grid>
-                  <p>
-                    <span style={spanStyle}>一元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
-                          conf.defs.phaseAIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>二元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
-                          conf.defs.phaseBIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseBIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>三元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
-                          conf.defs.phaseCIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
-                      }}
-                    />
-                  </p>
-                </Card.Grid>
+                <p>
+                  <span style={spanStyle}>一元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
+                        conf.defs.phaseAIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>二元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
+                        conf.defs.phaseBIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseBIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>三元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqPositive][
+                        conf.defs.phaseCIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
+                    }}
+                  />
+                </p>
               </Card>
             </Col>
             <Col span={6}>
               <Card title="三相四线 - 逆相序">
-                <Card.Grid>
-                  <p>
-                    <span style={spanStyle}>一元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
-                          conf.defs.phaseAIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>二元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
-                          conf.defs.phaseBIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseBIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>三元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
-                          conf.defs.phaseCIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
-                      }}
-                    />
-                  </p>
-                </Card.Grid>
+                <p>
+                  <span style={spanStyle}>一元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
+                        conf.defs.phaseAIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>二元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
+                        conf.defs.phaseBIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseBIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>三元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P4L][conf.defs.phaseSeqNegative][
+                        conf.defs.phaseCIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P4L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
+                    }}
+                  />
+                </p>
               </Card>
             </Col>
             <Col span={6}>
               <Card title="三相三线 - 正相序">
-                <Card.Grid>
-                  <p>
-                    <span style={spanStyle}>一元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][
-                          conf.defs.phaseAIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>三元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][
-                          conf.defs.phaseCIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
-                      }}
-                    />
-                  </p>
-                  <p>&nbsp;</p>
-                </Card.Grid>
+                <p>
+                  <span style={spanStyle}>一元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][
+                        conf.defs.phaseAIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseAIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>三元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqPositive][
+                        conf.defs.phaseCIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqPositive, conf.defs.phaseCIndex)
+                    }}
+                  />
+                </p>
+                <p>&nbsp;</p>
               </Card>
             </Col>
             <Col span={6} style={{ height: '100%' }}>
               <Card title="三相三线 - 逆相序">
-                <Card.Grid>
-                  <p>
-                    <span style={spanStyle}>一元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][
-                          conf.defs.phaseAIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
-                      }}
-                    />
-                  </p>
-                  <p>
-                    <span style={spanStyle}>三元件</span>
-                    <InputNumber
-                      value={
-                        conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][
-                          conf.defs.phaseCIndex
-                        ]
-                      }
-                      min={0}
-                      max={360}
-                      step={0.1}
-                      onChange={(value) => {
-                        changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
-                      }}
-                    />
-                  </p>
-                  <p>&nbsp;</p>
-                </Card.Grid>
+                <p>
+                  <span style={spanStyle}>一元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][
+                        conf.defs.phaseAIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseAIndex)
+                    }}
+                  />
+                </p>
+                <p>
+                  <span style={spanStyle}>三元件</span>
+                  <InputNumber
+                    value={
+                      conf.voltagePhaseDelay[conf.defs.lineMode3P3L][conf.defs.phaseSeqNegative][
+                        conf.defs.phaseCIndex
+                      ]
+                    }
+                    min={0}
+                    max={360}
+                    step={0.1}
+                    onChange={(value) => {
+                      changeConfiguration(value, conf.defs.lineMode3P3L, conf.defs.phaseSeqNegative, conf.defs.phaseCIndex)
+                    }}
+                  />
+                </p>
+                <p>&nbsp;</p>
               </Card>
             </Col>
           </Row>
@@ -237,22 +229,20 @@ class Global extends Component {
       <div>
         <Card title="全局配置">
           <Card title="正确接线时 A 相电流角度配置">
-            <Card.Grid>
-              <p>
-                <span style={spanStyle}>范围</span>
-                <InputNumber
-                  value={conf.global.currentADelayAngle}
-                  min={0}
-                  max={360.0}
-                  step={1.0}
-                  onChange={changeCurrentAngle}
-                />
-                <span> - </span>
-                <InputNumber value={conf.global.currentADelayAngle + 60.0 < 360 ? conf.global.currentADelayAngle + 60.0 : conf.global.currentADelayAngle - 300.0} disabled />
-              </p>
-              <p unselectable>&nbsp;</p>
-              <p unselectable>&nbsp;</p>
-            </Card.Grid>
+            <p>
+              <span style={spanStyle}>范围</span>
+              <InputNumber
+                value={conf.global.currentADelayAngle}
+                min={0}
+                max={360.0}
+                step={1.0}
+                onChange={changeCurrentAngle}
+              />
+              <span> - </span>
+              <InputNumber value={conf.global.currentADelayAngle + 60.0 < 360 ? conf.global.currentADelayAngle + 60.0 : conf.global.currentADelayAngle - 300.0} disabled />
+            </p>
+            <p unselectable>&nbsp;</p>
+            <p unselectable>&nbsp;</p>
           </Card>
         </Card>
       </div>
