@@ -14,10 +14,6 @@ class Details extends Component {
     router.push('/computeResult');
   };
 
-  back = () => {
-    router.push('/');
-  };
-
   render() {
     return (
       <div className={styles.main}>
