@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Upload, Button, Icon, message, Col } from 'antd';
+import { Button, Icon, Col } from 'antd';
 import XLSX from 'xlsx';
 
 class JsonToExel extends Component {
   exportFile = () => {
     /* Generate Workbook */
-    console.log("here")
     let data = []
     var wb = XLSX.utils.book_new();
     var ws = XLSX.utils.json_to_sheet(data, { header: ['Name', 'Location'] });
