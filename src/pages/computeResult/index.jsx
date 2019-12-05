@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Row, Col, Input, Button, Card, message } from 'antd'
 import { connect } from 'dva'
 import router from 'umi/router'
+import styles from '../result/style.less'
 
 const spanStyle = {
   marginRight: '12px',
@@ -47,12 +48,12 @@ class Result extends Component {
 
   render() {
     return (
-      <div>
-        <Row justify="center">
+      <div className={styles.result}>
+        <Row gutter={[12, 12]}>
           <Col offset={4} span={16}>
             <Input.Search size="large" placeholder='输入想要查看的数据的行数' type='number' onSearch={this.onSearch} enterButton />
           </Col>
-          <Col offset={1} style={{ marginTop: 20, marginBottom: 20 }} span={22}>
+          <Col style={{ marginTop: 20 }} span={24}>
             <Card title="查询结果">
               <Card headStyle={{backgroundColor: '#d6e4ff'}} type="inner" title="基础信息">
                 <Card.Grid style={gridStyle}>
@@ -195,9 +196,6 @@ class Result extends Component {
               </Card>
             </Card>
           </Col>
-        </Row>
-        <Row>
-          <Col span={1}></Col>
           <Col span={2}>
             <Button type="primary" size={'large'} onClick={this.back}>
               返回
