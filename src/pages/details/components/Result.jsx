@@ -114,7 +114,7 @@ class Result extends Component {
     return (
       <div className={styles.main}>
         <Col span={24}>
-          <Card title="上传文件并计算">
+          <Card title="上传文件">
             <Col span={12}>
               <Upload accept=".xlsx, .xls" transformFile={this.basicTransformFile}>
                 <Button>
@@ -134,6 +134,11 @@ class Result extends Component {
         <Col span={2}>
           <Button type="primary" size="large" onClick={this.onMerge}>
             计算结果
+          </Button>
+        </Col>
+        <Col span={20}>
+          <Button type="primary" size="large" onClick={this.back}>
+            返回
           </Button>
         </Col>
       </div>

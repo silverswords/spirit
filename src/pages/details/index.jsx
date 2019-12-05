@@ -32,11 +32,6 @@ class Details extends Component {
             <PostFilter />
           </Col>
           <Result />
-          <Col span={20}>
-            <Button type="primary" size="large" onClick={this.back}>
-              返回
-            </Button>
-          </Col>
         </Row>
       </div>
     );
