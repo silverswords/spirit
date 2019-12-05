@@ -137,10 +137,6 @@ class Result extends Component {
                     <span style={spanStyle}>三相无功功率: </span>
                     <span>{this.state.selectedData.phaseReactivePower ? this.state.selectedData.phaseReactivePower.join(', ') : ''}</span>
                   </p>
-                  <p>
-                    <span style={spanStyle}>变压器容量: </span>
-                    <span>{this.state.selectedData.transformerCapacity}</span>
-                  </p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>

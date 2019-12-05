@@ -6,7 +6,7 @@ import Global from './components/Global';
 import Filter from './components/Filter';
 import PreFilter from './components/PreFilter.jsx'
 import PostFilter from './components/PostFilter';
-import ExelToJson from './components/Result';
+import Result from './components/Result';
 import styles from './style.less';
 
 class Details extends Component {
@@ -31,16 +31,7 @@ class Details extends Component {
           <Col span={24}>
             <PostFilter />
           </Col>
-          <Col span={24}>
-            <Card title="上传文件并计算">
-              <ExelToJson />
-            </Card>
-          </Col>
-          <Col span={2}>
-            <Button type="primary" size="large" onClick={this.startCalculation}>
-              计算结果
-            </Button>
-          </Col>
+          <Result />
           <Col span={20}>
             <Button type="primary" size="large" onClick={this.back}>
               返回

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Upload, Button, Icon, message, Col } from 'antd';
+import { Upload, Button, Icon, message, Col, Card } from 'antd';
 import XLSX from 'xlsx';
 import { connect } from 'dva';
 import router from 'umi/router';
@@ -113,22 +113,28 @@ class Result extends Component {
   render() {
     return (
       <div className={styles.main}>
-        <Col span={8}>
-          <Upload accept=".xlsx, .xls" transformFile={this.basicTransformFile}>
-            <Button>
-              <Icon type="upload" /> 运行数据文件
-            </Button>
-          </Upload>
+        <Col span={24}>
+          <Card title="上传文件并计算">
+            <Col span={12}>
+              <Upload accept=".xlsx, .xls" transformFile={this.basicTransformFile}>
+                <Button>
+                  <Icon type="upload" /> 运行数据文件
+                </Button>
+              </Upload>
+            </Col>
+            <Col span={12}>
+              <Upload accept=".xlsx, .xls" transformFile={this.sg186TransformFile}>
+                <Button>
+                  <Icon type="upload" /> SG186数据文件
+                </Button>
+              </Upload>
+            </Col>
+          </Card>
         </Col>
-        <Col span={8}>
-          <Upload accept=".xlsx, .xls" transformFile={this.sg186TransformFile}>
-            <Button>
-              <Icon type="upload" /> SG186数据文件
-            </Button>
-          </Upload>
-        </Col>
-        <Col span={8}>
-          <Button onClick={this.onMerge}>开始计算</Button>
+        <Col span={2}>
+          <Button type="primary" size="large" onClick={this.onMerge}>
+            计算结果
+          </Button>
         </Col>
       </div>
     );
