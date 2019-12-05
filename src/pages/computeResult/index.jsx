@@ -28,7 +28,7 @@ class Result extends Component {
     router.push('/')
   }
 
-  roResult = () => {
+  toResult = () => {
     router.push('/result')
   }
 
