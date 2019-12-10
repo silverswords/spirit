@@ -110,9 +110,13 @@ class Map extends Component {
           if (e.target.B.extData.id === this.state.markers[i].index) {
             let iconAddress
             if (this.state.markers[i].result == '正确') {
-              iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+              iconAddress = process.env.NODE_ENV === 'development' ?
+              "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png" :
+              `../src/assets/poi-marker-default.png`
             } else {
-              iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+              iconAddress = process.env.NODE_ENV === 'development' ?
+              "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png" :
+              `../src/assets/poi-marker-red.png`
             }
   
             const newMarker = new AMap.Marker({
@@ -137,11 +141,15 @@ class Map extends Component {
       this.props.conf.result.forEach(function(marker) {
         let iconAddress
         if (marker.result == '正确') {
-          iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png"
+          iconAddress = process.env.NODE_ENV === 'development' ?
+          "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png" :
+          `../src/assets/poi-marker-default.png`
         } else {
-          iconAddress = "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png"
+          iconAddress = process.env.NODE_ENV === 'development' ?
+          "//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-red.png" :
+          `../src/assets/poi-marker-red.png`
         }
-  
+
         let newMarker = new AMap.Marker({
           map: mmap,
           bubble: true,
