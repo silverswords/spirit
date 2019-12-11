@@ -31,7 +31,7 @@ const realAngle = (data, args) => {
   }
 
   if (data['elementsRealAngle'][1] == undefined) {
-    data['elementsRealAngle'][1] = NaN
+    data['elementsRealAngle'][1] = NaN;
   }
 };
 
@@ -61,7 +61,7 @@ const elecCurrent = (data, args) => {
   }
 
   if (data['elementsCurrentLagAngle'][1] == undefined) {
-    data['elementsCurrentLagAngle'][1] = NaN
+    data['elementsCurrentLagAngle'][1] = NaN;
   }
 };
 
@@ -81,7 +81,7 @@ const accessMethod = (data, config, args) => {
   }
 
   if (data['elementsAccessMethods'][1] == undefined) {
-    data['elementsAccessMethods'][1] = '-'
+    data['elementsAccessMethods'][1] = '-';
   }
 };
 
@@ -117,8 +117,8 @@ const isNotAccessRight = (data, args) => {
 // args: [ 0 'phaseSeq', 1 'phaseVoltage', 2 'phaseCurrent', 3 'elementsCurrentLagAngle', 4 'elementsAccessMethods', 5 'phaseEffectivePower']
 const correctPowerAWith3P4L = (data, args) => {
   let correctPowerA = [];
-
-  if (data[args[4]][0].slice(0, 1) === '-') {
+  // console.log('here', data[args[4]][0])
+  if (data[args[0]] === 0) {
     correctPowerA[0] = -1 * data[args[5]][0];
     correctPowerA[1] = -1 * data[args[1]][0] * data[args[2]][1] * Math.cos(data[args[3]][1]);
     correctPowerA[2] = -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(data[args[3]][2]);
@@ -209,7 +209,7 @@ const correctPowerAWith3P3L = (data, args) => {
         UabL2: data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
       };
     }
-    if (data[args[4]][2].slice(0, 1) === '-') {
+    if (data[args[4]][1].slice(0, 1) === '-') {
       correctPowerA[1] = {
         UbcL1: data[args[5]][0],
         UbcL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
@@ -340,7 +340,7 @@ const correctPowerBWith3P3L = (data, args) => {
           Math.cos(330 - data[args[3]][1]),
       };
     }
-    if (data[args[4]][2].slice(0, 1) === '-') {
+    if (data[args[4]][1].slice(0, 1) === '-') {
       correctPowerB[2] = {
         UcbL1: -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]),
         UcbL2: -1 * data[args[5]][2],
@@ -352,12 +352,12 @@ const correctPowerBWith3P3L = (data, args) => {
       };
     }
   } else {
-    if (data[args[4]][2].slice(0, 1) === '-') {
-      correctPowerA[0] = {
+    if (data[args[4]][1].slice(0, 1) === '-') {
+      correctPowerB[0] = {
         UbcL2: data[args[5]][2],
         UbcL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
       };
-      correctPowerA[1] = {
+      correctPowerB[1] = {
         UcaL1:
           -1 *
           (data[args[1]][0] + data[args[1]][2]) *
@@ -372,11 +372,11 @@ const correctPowerBWith3P3L = (data, args) => {
           Math.cos(270.0 - data[args[3]][1]),
       };
     } else {
-      correctPowerA[0] = {
+      correctPowerB[0] = {
         UbcL2: -1 * data[args[5]][2],
         UbcL1: data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
       };
-      correctPowerA[1] = {
+      correctPowerB[1] = {
         UcaL1:
           (data[args[1]][0] + data[args[1]][2]) *
           0.5 *
@@ -390,17 +390,19 @@ const correctPowerBWith3P3L = (data, args) => {
       };
     }
     if (data[args[4]][0].slice(0, 1) === '-') {
-      correctPowerA[2] = {
+      correctPowerB[2] = {
         UabL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
         UabL2: -1 * data[args[5]][2],
       };
     } else {
-      correctPowerA[2] = {
+      correctPowerB[2] = {
         UabL1: data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
         UabL2: data[args[5]][2],
       };
     }
   }
+
+  return correctPowerB;
 };
 
 const computeTotal = (data, config) => {

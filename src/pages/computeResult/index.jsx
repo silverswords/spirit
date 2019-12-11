@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { Row, Col, Input, Button, Card, message } from 'antd'
-import { connect } from 'dva'
-import router from 'umi/router'
-import styles from '../result/style.less'
+import React, { Component } from 'react';
+import { Row, Col, Input, Button, Card, message } from 'antd';
+import { connect } from 'dva';
+import router from 'umi/router';
+import styles from '../result/style.less';
 
 const spanStyle = {
   marginRight: '12px',
-}
+};
 
 const gridStyle = {
   width: '25%',
@@ -15,47 +15,52 @@ const gridStyle = {
 @connect(({ compute }) => ({
   result: compute,
 }))
-
 class Result extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedData: {}
+      selectedData: {},
     };
   }
 
   back = () => {
-    router.push('/')
-  }
+    router.push('/');
+  };
 
   toResult = () => {
-    router.push('/result')
-  }
+    router.push('/result');
+  };
 
-  onSearch = (value) => {
+  onSearch = value => {
     const { result } = this.props;
-    const data = result.compute.resultDataList[value]
+    const data = result.compute.resultDataList[value];
 
     if (data == undefined) {
       message.error('该行数据不存在');
-      return false
+      return false;
     }
 
     this.setState({
-      selectedData: data
+      selectedData: data,
     });
-  }
+  };
 
   render() {
     return (
       <div className={styles.result}>
         <Row gutter={[12, 12]}>
           <Col offset={4} span={16}>
-            <Input.Search size="large" placeholder='输入想要查看的数据的行数' type='number' onSearch={this.onSearch} enterButton />
+            <Input.Search
+              size="large"
+              placeholder="输入想要查看的数据的行数"
+              type="number"
+              onSearch={this.onSearch}
+              enterButton
+            />
           </Col>
           <Col style={{ marginTop: 20 }} span={24}>
             <Card title="查询结果">
-              <Card headStyle={{backgroundColor: '#d6e4ff'}} type="inner" title="基础信息">
+              <Card headStyle={{ backgroundColor: '#d6e4ff' }} type="inner" title="基础信息">
                 <Card.Grid style={gridStyle}>
                   <p>
                     <span style={spanStyle}>所: </span>
@@ -105,7 +110,11 @@ class Result extends Component {
                   </p>
                   <p>
                     <span style={spanStyle}>三相电流: </span>
-                    <span>{this.state.selectedData.phaseCurrent ? this.state.selectedData.phaseCurrent.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.phaseCurrent
+                        ? this.state.selectedData.phaseCurrent.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>标定电压: </span>
@@ -113,7 +122,11 @@ class Result extends Component {
                   </p>
                   <p>
                     <span style={spanStyle}>三相电压: </span>
-                    <span>{this.state.selectedData.phaseVoltage ? this.state.selectedData.phaseVoltage.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.phaseVoltage
+                        ? this.state.selectedData.phaseVoltage.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
@@ -127,7 +140,11 @@ class Result extends Component {
                   </p>
                   <p>
                     <span style={spanStyle}>三相有功功率: </span>
-                    <span>{this.state.selectedData.phaseEffectivePower ? this.state.selectedData.phaseEffectivePower.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.phaseEffectivePower
+                        ? this.state.selectedData.phaseEffectivePower.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>总无功功率: </span>
@@ -135,8 +152,13 @@ class Result extends Component {
                   </p>
                   <p>
                     <span style={spanStyle}>三相无功功率: </span>
-                    <span>{this.state.selectedData.phaseReactivePower ? this.state.selectedData.phaseReactivePower.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.phaseReactivePower
+                        ? this.state.selectedData.phaseReactivePower.join(', ')
+                        : ''}
+                    </span>
                   </p>
+                  <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
@@ -160,33 +182,63 @@ class Result extends Component {
                   <p>&nbsp;</p>
                 </Card.Grid>
               </Card>
-              <Card headStyle={{backgroundColor: '#ffccc7'}} style={{ marginTop: 16 }} type="inner" title="计算数据">
-                <Card.Grid style={{width: '50%'}}>
+              <Card
+                headStyle={{ backgroundColor: '#ffccc7' }}
+                style={{ marginTop: 16 }}
+                type="inner"
+                title="计算数据"
+              >
+                <Card.Grid style={{ width: '50%' }}>
                   <p>
                     <span style={spanStyle}>真实角度: </span>
-                    <span>{this.state.selectedData.elementsRealAngle ? this.state.selectedData.elementsRealAngle.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.elementsRealAngle
+                        ? this.state.selectedData.elementsRealAngle.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>基本角度: </span>
-                    <span>{this.state.selectedData.elementsBasicAngle ? this.state.selectedData.elementsBasicAngle.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.elementsBasicAngle
+                        ? this.state.selectedData.elementsBasicAngle.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>各元件电压滞后角度: </span>
-                    <span>{this.state.selectedData.elementsVoltageLagAngle ? this.state.selectedData.elementsVoltageLagAngle.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.elementsVoltageLagAngle
+                        ? this.state.selectedData.elementsVoltageLagAngle.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>各元件电流滞后角度: </span>
-                    <span>{this.state.selectedData.elementsCurrentLagAngle ? this.state.selectedData.elementsCurrentLagAngle.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.elementsCurrentLagAngle
+                        ? this.state.selectedData.elementsCurrentLagAngle.join(', ')
+                        : ''}
+                    </span>
                   </p>
                   <p>
                     <span style={spanStyle}>电流二次线接入方式: </span>
-                    <span>{this.state.selectedData.elementsAccessMethods ? this.state.selectedData.elementsAccessMethods.join(', ') : ''}</span>
+                    <span>
+                      {this.state.selectedData.elementsAccessMethods
+                        ? this.state.selectedData.elementsAccessMethods.join(', ')
+                        : ''}
+                    </span>
                   </p>
                 </Card.Grid>
-                <Card.Grid style={{width: '50%'}}>
+                <Card.Grid style={{ width: '50%' }}>
                   <p>
                     <span style={spanStyle}>计算结果: </span>
                     <span>{this.state.selectedData.info}</span>
+                    <span>有无接线错误: </span>
+                    <span>{this.state.selectedData.isWiringError}</span>
+                    {/* <span>{this.state.selectedData.correctPowerA}</span>
+                    <span>{this.state.selectedData.correctPowerB}</span>
+                    <span>{this.state.selectedData.correctPowerC}</span> */}
                   </p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>

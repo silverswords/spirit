@@ -17,8 +17,9 @@ const handlers = [
     //   console.log('here two')
     //   return false;
     // }
-    return true
+    // return true
   },
+
   function filterThree(data, conf) {
     let tmpEffectivePower = 0;
     let configPower = conf.pre.params[conf.defs.prePhaseSeqCheck][0];
@@ -59,7 +60,7 @@ const handlers = [
     let minVol = Math.max(...data['phaseVoltage']);
     const limit = conf.pre.params[conf.defs.preVoltageBalanceCheck][0];
     if (maxVol - minVol > maxVol * limit) {
-      console.log('here five')
+      console.log('here five');
       return false;
     } else {
       return true;
@@ -71,7 +72,7 @@ const handlers = [
     let minVol = Math.max(...data['phaseCurrent']);
     const limit = conf.pre.params[conf.defs.preCurrentBalanceCheck][0];
     if (maxVol - minVol > maxVol * limit) {
-      console.log('here six')
+      console.log('here six');
       return false;
     } else {
       return true;
@@ -80,10 +81,10 @@ const handlers = [
   // todo
   function filterSeven(data, conf) {
     if (data['transformerCapacity'] > conf.pre.params[conf.defs.preCurrentBalanceCheck][0]) {
-      return true
+      return true;
     } else {
-      console.log('here seven')
-      return false
+      console.log('here seven');
+      return false;
     }
   },
 ];
@@ -92,18 +93,17 @@ const preFilter = (data, conf) => {
   for (let i = 0; i < conf.pre.preFiltersSelected.length; i++) {
     if (conf.pre.preFiltersSelected[i]) {
       if (handlers[i](data, conf)) {
-        data.isError = false
+        data.isError = false;
         continue;
       } else {
         data.info = `${conf.filters.preFilterResult(i)}`;
-        data.isError = true
+        data.isError = true;
         return false;
       }
     }
   }
-  
 
   return true;
-}
+};
 
-export default preFilter
+export default preFilter;

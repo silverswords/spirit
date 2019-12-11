@@ -6,12 +6,13 @@ import router from 'umi/router';
 
 import styles from './result.less';
 import transformDataListKeys from '@/utils/transform.js';
-import preFilter from '@/utils/preFilter'
-import postFilter from '@/utils/postFilter'
-import compose from '@/utils/compute'
+import preFilter from '@/utils/preFilter';
+import postFilter from '@/utils/postFilter';
+import compose from '@/utils/compute';
 
 @connect(({ filter, configuration }) => ({
-  conf: filter,  globalConf: configuration
+  conf: filter,
+  globalConf: configuration,
 }))
 class Result extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Result extends Component {
         const workbook = XLSX.read(result, { type: 'binary', cellDates: true });
         for (const sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
-            data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet], {raw: false}));
+            data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet], { raw: false }));
           }
         }
         message.success('上传成功！');
@@ -52,7 +53,13 @@ class Result extends Component {
     reader.onload = event => {
       try {
         const { result } = event.target;
-        const workbook = XLSX.read(result, { type: 'binary', cellDates:true, cellNF: false, cellText: false, dateNF: "YYYY-MM-DD HH:MM:SS" });
+        const workbook = XLSX.read(result, {
+          type: 'binary',
+          cellDates: true,
+          cellNF: false,
+          cellText: false,
+          dateNF: 'YYYY-MM-DD HH:MM:SS',
+        });
         for (const sheet in workbook.Sheets) {
           if (workbook.Sheets.hasOwnProperty(sheet)) {
             data = data.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
@@ -88,22 +95,23 @@ class Result extends Component {
     }
 
     for (let i = 0; i < mergeDataList.length; i++) {
-      let result = {}
-      
-      let data = transformDataListKeys(mergeDataList[i]);
-      preFilter(data, conf)
-      compose.computeTotal(data, globalConf.global)
-      postFilter(data, conf)
-      
-      result = {...data}
-      resultList.push(result)
-    }
+      let result = {};
 
-    let listData = { resultList, removedList }
+      let data = transformDataListKeys(mergeDataList[i]);
+      preFilter(data, conf);
+      compose.computeTotal(data, globalConf.global);
+      postFilter(data, conf);
+
+      result = { ...data };
+      resultList.push(result);
+    }
+    console.log(resultList, 'resultList');
+
+    let listData = { resultList, removedList };
     dispatch({
       type: 'compute/computeResultDataChanged',
       payload: {
-        value: listData
+        value: listData,
       },
     });
 
