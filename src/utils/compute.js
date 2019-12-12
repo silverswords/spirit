@@ -31,7 +31,7 @@ const realAngle = (data, args) => {
   }
 
   if (data['elementsRealAngle'][1] == undefined) {
-    data['elementsRealAngle'][1] = NaN;
+    data['elementsRealAngle'][1] = NaN
   }
 };
 
@@ -61,7 +61,7 @@ const elecCurrent = (data, args) => {
   }
 
   if (data['elementsCurrentLagAngle'][1] == undefined) {
-    data['elementsCurrentLagAngle'][1] = NaN;
+    data['elementsCurrentLagAngle'][1] = NaN
   }
 };
 
@@ -81,7 +81,7 @@ const accessMethod = (data, config, args) => {
   }
 
   if (data['elementsAccessMethods'][1] == undefined) {
-    data['elementsAccessMethods'][1] = '-';
+    data['elementsAccessMethods'][1] = '-'
   }
 };
 

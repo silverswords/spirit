@@ -234,16 +234,26 @@ class Result extends Component {
                   <p>
                     <span style={spanStyle}>计算结果: </span>
                     <span>{this.state.selectedData.info}</span>
+                  </p>
+                  <p>
                     <span>有无接线错误: </span>
                     <span>{this.state.selectedData.isWiringError}</span>
-                    {/* <span>{this.state.selectedData.correctPowerA}</span>
-                    <span>{this.state.selectedData.correctPowerB}</span>
-                    <span>{this.state.selectedData.correctPowerC}</span> */}
                   </p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
-                  <p>&nbsp;</p>
+                  {/* <p>
+                    <span>A相正确功率: </span>
+                    <span>{this.state.selectedData.correctPowerA}</span>
+                  </p>
+                  <p>
+                    <span>B相正确功率: </span>
+                    <span>{this.state.selectedData.correctPowerB}</span>
+                  </p>
+                  <p>
+                    <span>C相正确功率: </span>
+                    <span>{this.state.selectedData.correctPowerC}</span>
+                  </p> */}
                 </Card.Grid>
               </Card>
             </Card>
