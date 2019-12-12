@@ -239,10 +239,11 @@ class Global extends Component {
                 onChange={changeCurrentAngle}
               />
               <span> - </span>
+            </p>
+            <p>
               <InputNumber value={conf.global.currentADelayAngle + 60.0 < 360 ? conf.global.currentADelayAngle + 60.0 : conf.global.currentADelayAngle - 300.0} disabled />
             </p>
-            {/* <p unselectable>&nbsp;</p> */}
-            <p unselectable>&nbsp;</p>
+            <p>&nbsp;</p>
           </Card>
         </Card>
       </div>
