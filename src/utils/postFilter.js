@@ -12,13 +12,6 @@ const handlers = [
   },
   // todo
   function filterTwo(data, conf) {
-    // if (data.c > conf.pre.params[conf.defs.preLoadCheck][0]) {
-    //   return true;
-    // } else {
-    //   console.log('here two')
-    //   return false;
-    // }
-
     // 判断有无接线错误
     if (data.isError === true) {
       data.isWiringError = '有';

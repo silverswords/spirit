@@ -96,8 +96,8 @@ class Result extends Component {
 
     for (let i = 0; i < mergeDataList.length; i++) {
       let result = {};
-
       let data = transformDataListKeys(mergeDataList[i]);
+
       preFilter(data, conf);
       compose.computeTotal(data, globalConf.global);
       postFilter(data, conf);
@@ -105,7 +105,6 @@ class Result extends Component {
       result = { ...data };
       resultList.push(result);
     }
-    console.log(resultList, 'resultList');
 
     let listData = { resultList, removedList };
     dispatch({

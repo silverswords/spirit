@@ -11,13 +11,19 @@ const handlers = [
   },
   // todo
   function filterTwo(data, conf) {
-    // if (data.c > conf.pre.params[conf.defs.preLoadCheck][0]) {
-    //   return true;
-    // } else {
-    //   console.log('here two')
-    //   return false;
-    // }
-    // return true
+    const preLoadCheck = conf.pre.params[conf.defs.preLoadCheck][0];
+    const currents = data.phaseCurrent;
+    const transformerCapacity = data.transformerCapacity;
+
+    for (let i = 0; i < currents.length; i++) {
+      if (currents[i] && currents[i] > transformerCapacity * preLoadCheck / 100) {
+        continue
+      } else {
+        return false
+      }
+    }
+
+    return true
   },
 
   function filterThree(data, conf) {

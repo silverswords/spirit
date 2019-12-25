@@ -117,7 +117,6 @@ const isNotAccessRight = (data, args) => {
 // args: [ 0 'phaseSeq', 1 'phaseVoltage', 2 'phaseCurrent', 3 'elementsCurrentLagAngle', 4 'elementsAccessMethods', 5 'phaseEffectivePower']
 const correctPowerAWith3P4L = (data, args) => {
   let correctPowerA = [];
-  // console.log('here', data[args[4]][0])
   if (data[args[0]] === 0) {
     correctPowerA[0] = -1 * data[args[5]][0];
     correctPowerA[1] = -1 * data[args[1]][0] * data[args[2]][1] * Math.cos(data[args[3]][1]);
@@ -199,127 +198,127 @@ const correctPowerAWith3P3L = (data, args) => {
   let correctPowerA = [];
   if (data[args[0]] === 0) {
     if (data[args[4]][0].slice(0, 1) === '-') {
-      // correctPowerA[0] = {
-      //   UabL1: -1 * data[args[5]][0],
-      //   UabL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
-      // };
-      correctPowerA[0] = -1 * data[args[5]][0]
+      correctPowerA[0] = {
+        UabL1: -1 * data[args[5]][0],
+        UabL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
+      };
+      // correctPowerA[0] = -1 * data[args[5]][0]
     } else {
-      // correctPowerA[0] = {
-      //   UabL1: data[args[5]][0],
-      //   UabL2: data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
-      // };
-      correctPowerA[0] = data[args[5]][0]
+      correctPowerA[0] = {
+        UabL1: data[args[5]][0],
+        UabL2: data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
+      };
+      // correctPowerA[0] = data[args[5]][0]
     }
     if (data[args[4]][1].slice(0, 1) === '-') {
-      // correctPowerA[1] = {
-      //   UbcL1: data[args[5]][0],
-      //   UbcL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerA[1] = data[args[5]][0],
-      // correctPowerA[2] = {
-      //   UcaL1:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(270 - data[args[3]][0]),
-      //   UcaL2:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(270 - data[args[3]][1]),
-      // };
-      correctPowerA[2] = -1 *
-      (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(270 - data[args[3]][0]);
+      correctPowerA[1] = {
+        UbcL1: data[args[5]][0],
+        UbcL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerA[1] = data[args[5]][0],
+      correctPowerA[2] = {
+        UcaL1:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(270 - data[args[3]][0]),
+        UcaL2:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(270 - data[args[3]][1]),
+      };
+      // correctPowerA[2] = -1 *
+      // (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(270 - data[args[3]][0]);
     } else {
-      // correctPowerA[1] = {
-      //   UbcL1: -1 * data[args[5]][0],
-      //   UbcL2: data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerA[1] = -1 * data[args[5]][0]
-      // correctPowerA[2] = {
-      //   UcaL1:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(270 - data[args[3]][0]),
-      //   UcaL2:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(270 - data[args[3]][1]),
-      // };
-      correctPowerA[2] = (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(270 - data[args[3]][0]);
+      correctPowerA[1] = {
+        UbcL1: -1 * data[args[5]][0],
+        UbcL2: data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerA[1] = -1 * data[args[5]][0]
+      correctPowerA[2] = {
+        UcaL1:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(270 - data[args[3]][0]),
+        UcaL2:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(270 - data[args[3]][1]),
+      };
+      // correctPowerA[2] = (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(270 - data[args[3]][0]);
     }
   } else {
     if (data[args[4]][0].slice(0, 1) === '-') {
-      // correctPowerA[0] = {
-      //   UacL1:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(330 - data[args[3]][0]),
-      //   UacL2:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(330 - data[args[3]][1]),
-      // };
-      correctPowerA[0] = -1 *
-      (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(330 - data[args[3]][0]),
-      // correctPowerA[1] = {
-      //   UbaL1: data[args[5]][0],
-      //   UbaL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
-      // };
-      correctPowerA[1] = data[args[5]][0]
+      correctPowerA[0] = {
+        UacL1:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(330 - data[args[3]][0]),
+        UacL2:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(330 - data[args[3]][1]),
+      };
+      // correctPowerA[0] = -1 *
+      // (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(330 - data[args[3]][0]),
+      correctPowerA[1] = {
+        UbaL1: data[args[5]][0],
+        UbaL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
+      };
+      // correctPowerA[1] = data[args[5]][0]
     } else {
-      // correctPowerA[0] = {
-      //   UacL1:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(330 - data[args[3]][0]),
-      //   UacL2:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(330 - data[args[3]][1]),
-      // };
-      correctPowerA[0] = (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(330 - data[args[3]][0]),
-      // correctPowerA[1] = {
-      //   UbaL1: -1 * data[args[5]][0],
-      //   UbaL2: data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
-      // };
-      correctPowerA[1] = -1 * data[args[5]][0];
+      correctPowerA[0] = {
+        UacL1:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(330 - data[args[3]][0]),
+        UacL2:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(330 - data[args[3]][1]),
+      };
+      // correctPowerA[0] = (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(330 - data[args[3]][0]),
+      correctPowerA[1] = {
+        UbaL1: -1 * data[args[5]][0],
+        UbaL2: data[args[1]][0] * data[args[2]][2] * Math.cos(330.0 - data[args[3]][1]),
+      };
+      // correctPowerA[1] = -1 * data[args[5]][0];
     }
     if (data[args[4]][2].slice(0, 1) === '-') {
-      // correctPowerA[2] = {
-      //   UcbL1: -1 * data[args[5]][0],
-      //   UcbL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerA[2] = -1 * data[args[5]][0];
+      correctPowerA[2] = {
+        UcbL1: -1 * data[args[5]][0],
+        UcbL2: -1 * data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerA[2] = -1 * data[args[5]][0];
     } else {
-      // correctPowerA[2] = {
-      //   UcbL1: data[args[5]][0],
-      //   UcbL2: data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerA[2] = data[args[5]][0];
+      correctPowerA[2] = {
+        UcbL1: data[args[5]][0],
+        UcbL2: data[args[1]][0] * data[args[2]][2] * Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerA[2] = data[args[5]][0];
     }
   }
 
@@ -330,127 +329,127 @@ const correctPowerBWith3P3L = (data, args) => {
   let correctPowerB = [];
   if (data[args[0]] === 0) {
     if (data[args[4]][0].slice(0, 1) === '-') {
-      // correctPowerB[0] = {
-      //   UbaL1: -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]),
-      //   UbaL2: data[args[5]][2],
-      // };
-      correctPowerB[0] = -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]);
-      // correctPowerB[1] = {
-      //   UacL1:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(330 - data[args[3]][0]),
-      //   UacL2:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(330 - data[args[3]][1]),
-      // };
-      correctPowerB[1] = -1 *
-      (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(330 - data[args[3]][0]);
+      correctPowerB[0] = {
+        UbaL1: -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]),
+        UbaL2: data[args[5]][2],
+      };
+      //correctPowerB[0] = -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]);
+      correctPowerB[1] = {
+        UacL1:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(330 - data[args[3]][0]),
+        UacL2:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(330 - data[args[3]][1]),
+      };
+      // correctPowerB[1] = -1 *
+      // (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(330 - data[args[3]][0]);
     } else {
-      // correctPowerB[0] = {
-      //   UbaL1: data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]),
-      //   UbaL2: -1 * data[args[5]][2],
-      // };
-      correctPowerB[0] = data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]);
-      // correctPowerB[1] = {
-      //   UacL1:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(330 - data[args[3]][0]),
-      //   UacL2:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(330 - data[args[3]][1]),
-      // };
-      correctPowerB[1] = (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(330 - data[args[3]][0]);
+      correctPowerB[0] = {
+        UbaL1: data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]),
+        UbaL2: -1 * data[args[5]][2],
+      };
+      // correctPowerB[0] = data[args[1]][2] * data[args[2]][0] * Math.cos(330.0 - data[args[3]][0]);
+      correctPowerB[1] = {
+        UacL1:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(330 - data[args[3]][0]),
+        UacL2:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(330 - data[args[3]][1]),
+      };
+      // correctPowerB[1] = (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(330 - data[args[3]][0]);
     }
     if (data[args[4]][1].slice(0, 1) === '-') {
-      // correctPowerB[2] = {
-      //   UcbL1: -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]),
-      //   UcbL2: -1 * data[args[5]][2],
-      // };
-      correctPowerB[2] = -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]);
+      correctPowerB[2] = {
+        UcbL1: -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]),
+        UcbL2: -1 * data[args[5]][2],
+      };
+      // correctPowerB[2] = -1 * data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]);
     } else {
-      // correctPowerB[2] = {
-      //   UcbL1: data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]),
-      //   UcbL2: data[args[5]][2],
-      // };
-      correctPowerB[2] = data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]);
+      correctPowerB[2] = {
+        UcbL1: data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]),
+        UcbL2: data[args[5]][2],
+      };
+      // correctPowerB[2] = data[args[1]][2] * data[args[2]][0] * Math.cos(270.0 - data[args[3]][0]);
     }
   } else {
     if (data[args[4]][1].slice(0, 1) === '-') {
-      // correctPowerB[0] = {
-      //   UbcL2: data[args[5]][2],
-      //   UbcL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
-      // };
-      correctPowerB[0] = data[args[5]][2];
-      // correctPowerB[1] = {
-      //   UcaL1:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(270.0 - data[args[3]][0]),
-      //   UcaL2:
-      //     -1 *
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerB[1] = -1 *
-      (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(270.0 - data[args[3]][0]);
+      correctPowerB[0] = {
+        UbcL2: data[args[5]][2],
+        UbcL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
+      };
+      // correctPowerB[0] = data[args[5]][2];
+      correctPowerB[1] = {
+        UcaL1:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(270.0 - data[args[3]][0]),
+        UcaL2:
+          -1 *
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerB[1] = -1 *
+      // (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(270.0 - data[args[3]][0]);
     } else {
-      // correctPowerB[0] = {
-      //   UbcL2: -1 * data[args[5]][2],
-      //   UbcL1: data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
-      // };
-      correctPowerB[0] = -1 * data[args[5]][2];
-      // correctPowerB[1] = {
-      //   UcaL1:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][0] *
-      //     Math.cos(270.0 - data[args[3]][0]),
-      //   UcaL2:
-      //     (data[args[1]][0] + data[args[1]][2]) *
-      //     0.5 *
-      //     data[args[2]][2] *
-      //     Math.cos(270.0 - data[args[3]][1]),
-      // };
-      correctPowerB[1] = (data[args[1]][0] + data[args[1]][2]) *
-      0.5 *
-      data[args[2]][0] *
-      Math.cos(270.0 - data[args[3]][0]);
+      correctPowerB[0] = {
+        UbcL2: -1 * data[args[5]][2],
+        UbcL1: data[args[1]][2] * data[args[2]][1] * Math.cos(270.0 - data[args[3]][0]),
+      };
+      // correctPowerB[0] = -1 * data[args[5]][2];
+      correctPowerB[1] = {
+        UcaL1:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][0] *
+          Math.cos(270.0 - data[args[3]][0]),
+        UcaL2:
+          (data[args[1]][0] + data[args[1]][2]) *
+          0.5 *
+          data[args[2]][2] *
+          Math.cos(270.0 - data[args[3]][1]),
+      };
+      // correctPowerB[1] = (data[args[1]][0] + data[args[1]][2]) *
+      // 0.5 *
+      // data[args[2]][0] *
+      // Math.cos(270.0 - data[args[3]][0]);
     }
     if (data[args[4]][0].slice(0, 1) === '-') {
-      // correctPowerB[2] = {
-      //   UabL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
-      //   UabL2: -1 * data[args[5]][2],
-      // };
-      correctPowerB[2] = -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]);
+      correctPowerB[2] = {
+        UabL1: -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
+        UabL2: -1 * data[args[5]][2],
+      };
+      // correctPowerB[2] = -1 * data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]);
     } else {
-      // correctPowerB[2] = {
-      //   UabL1: data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
-      //   UabL2: data[args[5]][2],
-      // };
-      correctPowerB[2] = data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]);
+      correctPowerB[2] = {
+        UabL1: data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]),
+        UabL2: data[args[5]][2],
+      };
+      // correctPowerB[2] = data[args[1]][2] * data[args[2]][1] * Math.cos(330.0 - data[args[3]][0]);
     }
   }
 
