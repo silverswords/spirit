@@ -22,7 +22,7 @@ class Result extends Component {
       selectedData: {},
       correctPowerA: '',
       correctPowerB: '',
-      correctPowerC: ''
+      correctPowerC: '',
     };
   }
 
@@ -47,12 +47,12 @@ class Result extends Component {
       selectedData: data,
       correctPowerA: data.correctPowerA[0],
       correctPowerB: data.correctPowerB[0],
-      correctPowerC: data.correctPowerC[0]
+      correctPowerC: data.correctPowerC[0],
     });
   };
 
   render() {
-    console.log(this.state.correctPowerA, "correctPowerA")
+    console.log(this.state.correctPowerA, 'correctPowerA');
     return (
       <div className={styles.result}>
         <Row gutter={[12, 12]}>
@@ -242,7 +242,11 @@ class Result extends Component {
                     <span style={spanStyle}>计算结果: </span>
                     <span>{this.state.selectedData.info}</span>
                   </p>
-                  <p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  {/* <p>
                     <span style={spanStyle}>有无接线错误: </span>
                     <span>{this.state.selectedData.isWiringError}</span>
                   </p>
@@ -257,7 +261,7 @@ class Result extends Component {
                   <p>
                     <span style={spanStyle}>C相正确功率: </span>
                     <span>{this.state.correctPowerC}</span>
-                  </p>
+                  </p> */}
                 </Card.Grid>
               </Card>
             </Card>
