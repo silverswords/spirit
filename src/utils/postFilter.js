@@ -132,14 +132,24 @@ const handlers = [
   },
 ];
 
+let errorInfo = [
+  '有功无功检查报错',
+  '负荷异常',
+  '相序异常',
+  '电压失压',
+  '电压不平衡',
+  '电流不平衡',
+  '负载不稳定',
+]
+
+
 const postFilter = (data, conf) => {
   for (let i = 0; i < conf.pre.preFiltersSelected.length; i++) {
     if (conf.pre.preFiltersSelected[i]) {
       if (handlers[i](data, conf)) {
         continue;
       } else {
-        data.info = `${conf.filters.preFilterResult(i)}`;
-        return false;
+        data.info = `${errorInfo[i]}`;
       }
     }
   }

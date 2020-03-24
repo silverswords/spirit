@@ -5,7 +5,7 @@ import { connect } from 'dva';
 import router from 'umi/router';
 
 import styles from './result.less';
-import transformDataListKeys from '@/utils/transform.js';
+import { transformDataListKeys } from '@/utils/transform.js';
 import preFilter from '@/utils/preFilter';
 import postFilter from '@/utils/postFilter';
 import compose from '@/utils/compute';

@@ -1,4 +1,4 @@
-import Map from './map.js';
+import { Map, ResultMap } from './map.js';
 
 let mapKeysArray = Object.keys(Map);
 let transformData = {}
@@ -39,7 +39,7 @@ const mapKeysNumber = (data, margs) => {
 }
 
 // 把一条数据中文 keys 映射为 英文 keys
-const transformDataListKeys = (data) => {
+export const transformDataListKeys = (data) => {
   for (let i = 0; i < mapKeysArray.length; i++) {
     mapKeysNumber(data, i)
     i = arrayPush(data, i)
@@ -47,4 +47,72 @@ const transformDataListKeys = (data) => {
   return transformData
 };
 
-export default transformDataListKeys;
+// 
+export const generateFinalData = (data) => {
+  let result = []
+  console.log(data)
+  let keys = Object.keys(data[0]);
+  console.log(keys)
+  data.forEach(element => {
+    let obj = {}
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i] == 'phaseVoltage') {
+        obj['A相电压'] = element[keys[i]][0]
+        obj['B相电压'] = element[keys[i]][1] 
+        obj['C相电压'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'phaseCurrent') {
+        obj['A相电流'] = element[keys[i]][0]
+        obj['B相电流'] = element[keys[i]][1]
+        obj['C相电流'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'phaseEffectivePower') {
+        obj['A相有功功率'] = element[keys[i]][0]
+        obj['B相有功功率'] = element[keys[i]][1]
+        obj['C相有功功率'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'phaseReactivePower') {
+        obj['A相无功功率'] = element[keys[i]][0]
+        obj['B相无功功率'] = element[keys[i]][1]
+        obj['C相无功功率'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'elementsRealAngle') {
+        obj['一元件真实角度'] = element[keys[i]][0]
+        obj['二元件真实角度'] = element[keys[i]][1] ? element[keys[i]][1] : ''
+        obj['三元件真实角度'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'elementsBasicAngle') {
+        obj['一元件基础角度'] = element[keys[i]][0]
+        obj['二元件基础角度'] = element[keys[i]][1] ? element[keys[i]][1] : ''
+        obj['三元件基础角度'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'elementsVoltageLagAngle') {
+        obj['一元件电压滞后角度'] = element[keys[i]][0]
+        obj['二元件电压滞后角度'] = element[keys[i]][1] ? element[keys[i]][1] : ''
+        obj['三元件电压滞后角度'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'elementsCurrentLagAngle') {
+        obj['一元件电流滞后角度'] = element[keys[i]][0]
+        obj['二元件电流滞后角度'] = element[keys[i]][1] ? element[keys[i]][1] : ''
+        obj['三元件电流滞后角度'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'correctPower') {
+        obj['一元件实际功率'] = element[keys[i]][0]
+        obj['二元件实际功率'] = element[keys[i]][1]
+        obj['三元件实际功率'] = element[keys[i]][2]
+      }
+      if (keys[i] == 'phaseSeq') {
+        obj['向序'] = element[keys[i]] == 0 ? "三相三线" : "三相四线"
+      }
+      if (keys[i] == 'elementsAccessMethods') {
+        obj['二次线接入方式'] = toString(element[keys[i]])
+      }
+
+      obj[ResultMap[keys[i]]] = element[keys[i]]
+
+      result.push(obj)
+    }
+  })
+
+  return result
+}
