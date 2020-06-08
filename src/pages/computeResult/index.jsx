@@ -45,14 +45,13 @@ class Result extends Component {
 
     this.setState({
       selectedData: data,
-      correctPowerA: data.correctPowerA[0],
-      correctPowerB: data.correctPowerB[0],
-      correctPowerC: data.correctPowerC[0],
+      correctPowerA: data.correctPowerA ? data.correctPowerA[0] : 0,
+      correctPowerB: data.correctPowerB ? data.correctPowerB[0] : 0,
+      correctPowerC: data.correctPowerC ? data.correctPowerC[0] : 0,
     });
   };
 
   render() {
-    console.log(this.state.correctPowerA, 'correctPowerA');
     return (
       <div className={styles.result}>
         <Row gutter={[12, 12]}>
@@ -242,15 +241,14 @@ class Result extends Component {
                     <span style={spanStyle}>计算结果: </span>
                     <span>{this.state.selectedData.info}</span>
                   </p>
-                  <p>&nbsp;</p>
+                  <p>
+                    <span style={spanStyle}>有无接线错误: </span>
+                    <span>{this.state.selectedData.isWiringError}</span>
+                  </p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   <p>&nbsp;</p>
                   {/* <p>
-                    <span style={spanStyle}>有无接线错误: </span>
-                    <span>{this.state.selectedData.isWiringError}</span>
-                  </p>
-                  <p>
                     <span style={spanStyle}>A相正确功率: </span>
                     <span>{this.state.correctPowerA}</span>
                   </p>

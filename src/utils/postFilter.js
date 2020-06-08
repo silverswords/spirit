@@ -1,6 +1,8 @@
 import methods from './compute.js';
+
 const handlers = [
-  function filterOne(data, conf) {
+  // 有功无功检查
+  function activeAndReactivePowerCheck(data, conf) {
     if (
       data['effectivePower'] <= conf.pre.params[conf.defs.prePowerCheck][0] ||
       data['reactivePower'] <= conf.pre.params[conf.defs.prePowerCheck][1]
@@ -10,60 +12,24 @@ const handlers = [
       return true;
     }
   },
-  // todo
-  function filterTwo(data, conf) {
-    // 判断有无接线错误
-    if (data.isError === true) {
-      data.isWiringError = '有';
-      if (data.modeOfConnection === '三相四线') {
-        data.correctPowerA = methods.correctPowerAWith3P4L(data, [
-          'phaseSeq',
-          'phaseVoltage',
-          'phaseCurrent',
-          'elementsCurrentLagAngle',
-          'elementsAccessMethods',
-          'phaseEffectivePower',
-        ]);
-        data.correctPowerB = methods.correctPowerBWith3P4L(data, [
-          'phaseSeq',
-          'phaseVoltage',
-          'phaseCurrent',
-          'elementsCurrentLagAngle',
-          'elementsAccessMethods',
-          'phaseEffectivePower',
-        ]);
-        data.correctPowerC = methods.correctPowerCWith3P4L(data, [
-          'phaseSeq',
-          'phaseVoltage',
-          'phaseCurrent',
-          'elementsCurrentLagAngle',
-          'elementsAccessMethods',
-          'phaseEffectivePower',
-        ]);
+  // 负荷正常
+  function normalLoad(data, conf) {
+    const preLoadCheck = conf.pre.params[conf.defs.preLoadCheck][0];
+    const currents = data.phaseCurrent;
+    const transformerCapacity = data.transformerCapacity;
+
+    for (let i = 0; i < currents.length; i++) {
+      if (currents[i] && currents[i] > (transformerCapacity * preLoadCheck) / 100) {
+        continue;
       } else {
-        data.correctPowerA = methods.correctPowerAWith3P3L(data, [
-          'phaseSeq',
-          'phaseVoltage',
-          'phaseCurrent',
-          'elementsCurrentLagAngle',
-          'elementsAccessMethods',
-          'phaseEffectivePower',
-        ]);
-        data.correctPowerB = [];
-        data.correctPowerC = methods.correctPowerBWith3P3L(data, [
-          'phaseSeq',
-          'phaseVoltage',
-          'phaseCurrent',
-          'elementsCurrentLagAngle',
-          'elementsAccessMethods',
-          'phaseEffectivePower',
-        ]);
+        return false;
       }
-    } else {
-      data.isWiringError = '无';
     }
+
+    return true;
   },
-  function filterThree(data, conf) {
+  // 相序异常
+  function abnormalPhaseSequence(data, conf) {
     let tmpEffectivePower = 0;
     let configPower = conf.pre.params[conf.defs.prePhaseSeqCheck][0];
 
@@ -77,7 +43,8 @@ const handlers = [
       return true;
     }
   },
-  function filterFour(data, conf) {
+  // 电压失压
+  function voltageLoss(data, conf) {
     const configMinPower = conf.pre.params[conf.defs.preUnderVoltageCheck][0];
     const configTotalMinPower = conf.pre.params[conf.defs.preUnderVoltageCheck][1];
     const configAPower = conf.pre.params[conf.defs.preUnderVoltageCheck][2];
@@ -97,8 +64,8 @@ const handlers = [
       return true;
     }
   },
-  // todo
-  function filterFive(data, conf) {
+  // 电压不平衡
+  function voltageImbalance(data, conf) {
     let maxVol = Math.max(...data['phaseVoltage']);
     let minVol = Math.max(...data['phaseVoltage']);
     const limit = conf.pre.params[conf.defs.preVoltageBalanceCheck][0];
@@ -109,8 +76,8 @@ const handlers = [
       return true;
     }
   },
-  // todo
-  function filterSix(data, conf) {
+  // 电流不平衡
+  function currentImbalance(data, conf) {
     let maxVol = Math.max(...data['phaseCurrent']);
     let minVol = Math.max(...data['phaseCurrent']);
     const limit = conf.pre.params[conf.defs.preCurrentBalanceCheck][0];
@@ -121,8 +88,8 @@ const handlers = [
       return true;
     }
   },
-  // todo
-  function filterSeven(data, conf) {
+  // 负载稳定
+  function stableLoad(data, conf) {
     if (data['transformerCapacity'] > conf.pre.params[conf.defs.preCurrentBalanceCheck][0]) {
       return true;
     } else {
@@ -131,6 +98,58 @@ const handlers = [
     }
   },
 ];
+// 判断有无接线错误
+function wiringJudgment(data, isError) {
+  if (isError === true) {
+    data.isWiringError = '有';
+    if (data.modeOfConnection === '三相四线') {
+      data.correctPowerA = methods.correctPowerAWith3P4L(data, [
+        'phaseSeq',
+        'phaseVoltage',
+        'phaseCurrent',
+        'elementsCurrentLagAngle',
+        'elementsAccessMethods',
+        'phaseEffectivePower',
+      ]);
+      data.correctPowerB = methods.correctPowerBWith3P4L(data, [
+        'phaseSeq',
+        'phaseVoltage',
+        'phaseCurrent',
+        'elementsCurrentLagAngle',
+        'elementsAccessMethods',
+        'phaseEffectivePower',
+      ]);
+      data.correctPowerC = methods.correctPowerCWith3P4L(data, [
+        'phaseSeq',
+        'phaseVoltage',
+        'phaseCurrent',
+        'elementsCurrentLagAngle',
+        'elementsAccessMethods',
+        'phaseEffectivePower',
+      ]);
+    } else {
+      data.correctPowerA = methods.correctPowerAWith3P3L(data, [
+        'phaseSeq',
+        'phaseVoltage',
+        'phaseCurrent',
+        'elementsCurrentLagAngle',
+        'elementsAccessMethods',
+        'phaseEffectivePower',
+      ]);
+      data.correctPowerB = [];
+      data.correctPowerC = methods.correctPowerBWith3P3L(data, [
+        'phaseSeq',
+        'phaseVoltage',
+        'phaseCurrent',
+        'elementsCurrentLagAngle',
+        'elementsAccessMethods',
+        'phaseEffectivePower',
+      ]);
+    }
+  } else {
+    data.isWiringError = '无';
+  }
+}
 
 let errorInfo = [
   '有功无功检查报错',
@@ -140,8 +159,7 @@ let errorInfo = [
   '电压不平衡',
   '电流不平衡',
   '负载不稳定',
-]
-
+];
 
 const postFilter = (data, conf) => {
   for (let i = 0; i < conf.pre.preFiltersSelected.length; i++) {
@@ -150,6 +168,8 @@ const postFilter = (data, conf) => {
         continue;
       } else {
         data.info = `${errorInfo[i]}`;
+        const isError = true
+        wiringJudgment(data, isError)
       }
     }
   }

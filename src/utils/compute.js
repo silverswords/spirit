@@ -73,10 +73,10 @@ const accessMethod = (data, config, args) => {
   for (let i = 0; i < data[args[0]].length; i++) {
     if (data[args[0]][i] >= config.currentADelayAngle) {
       data['elementsAccessMethods'][i] =
-        lagSequence[parseInt((data[args[0]][i] - config.currentADelayAngle) / 60)];
+        lagSequence[parseInt((data[args[0]][i] - config.currentADelayAngle) / 60)] ? lagSequence[parseInt((data[args[0]][i] - config.currentADelayAngle) / 60)] : '0';
     } else {
       data['elementsAccessMethods'][i] =
-        lagSequence[parseInt((data[args[0]][i] + 360 - config.currentADelayAngle) / 60)];
+        lagSequence[parseInt((data[args[0]][i] + 360 - config.currentADelayAngle) / 60)] ? lagSequence[parseInt((data[args[0]][i] + 360 - config.currentADelayAngle) / 60)] : '0';
     }
   }
 
