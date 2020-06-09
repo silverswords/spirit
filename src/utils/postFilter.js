@@ -160,21 +160,29 @@ let errorInfo = [
   '电流不平衡',
   '负载不稳定',
 ];
-
+let errorTotal = 0;
+let correctTotal = 0;
+let errorResult = [];
 const postFilter = (data, conf) => {
-  for (let i = 0; i < conf.pre.preFiltersSelected.length; i++) {
-    if (conf.pre.preFiltersSelected[i]) {
-      if (handlers[i](data, conf)) {
-        continue;
-      } else {
-        data.info = `${errorInfo[i]}`;
-        const isError = true
-        wiringJudgment(data, isError)
-      }
-    }
+  let powerA = data.phaseCurrent[0] * data.phaseVoltage[0];
+  powerA = powerA > 0 ? powerA : -powerA;
+  let powerB = data.phaseCurrent[1] * data.phaseVoltage[1];
+  powerB = powerB > 0 ? powerB : -powerB;
+  let powerC = data.phaseCurrent[2] * data.phaseVoltage[2];
+  powerC = powerC > 0 ? powerC : -powerC;
+  const denominator = powerA + powerB + powerC;
+  const result = (data.effectivePower * 1000) / denominator;
+  if (result > 0.6 && result < 1.0) {
+    correctTotal += 1;
+    wiringJudgment(data, false);
+    console.log('correctTotal: ', correctTotal);
+  } else {
+    errorTotal += 1;
+    wiringJudgment(data, true);
+    errorResult.push(result);
+    console.log('errorTotal: ', errorTotal, 'errorResult: ', errorResult);
+    console.log(data.phaseCurrent[0], data.phaseCurrent[1], data.phaseCurrent[2]);
   }
-
-  return true;
 };
 
 export default postFilter;
