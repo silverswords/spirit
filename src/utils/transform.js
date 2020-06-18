@@ -49,9 +49,8 @@ export const transformDataListKeys = data => {
 
 export const generateFinalData = data => {
   let result = [];
-  console.log(data);
+  console.log(data[0]);
   let keys = Object.keys(data[0]);
-  console.log(keys);
   data.forEach(element => {
     let obj = {};
     for (let i = 0; i < keys.length; i++) {
@@ -105,12 +104,12 @@ export const generateFinalData = data => {
       }
       if (keys[i] == 'elementsAccessMethods') {
         obj['二次线接入方式'] = toString(element[keys[i]]);
+        console.log(obj['二次线接入方式']);
       }
 
       obj[ResultMap[keys[i]]] = element[keys[i]];
-
-      result.push(obj);
     }
+    result.push(obj);
   });
 
   return result;

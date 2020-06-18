@@ -80,12 +80,13 @@ class Result extends Component {
     let basicDataList = this.state.basicDataList;
     let sg186DataList = this.state.sg186DataList;
     let resultList = [];
-    let removedList = [];
+    let preremovedList = [];
+    let postremovdList = [];
     let mergeDataList = [];
 
     for (let i = 0; i < basicDataList.length; i++) {
       for (let j = 0; j < sg186DataList.length; j++) {
-        if (basicDataList[i]['用户编号'] === sg186DataList[j]['用户编号']) {
+        if (`0${basicDataList[i]['用户编号']}` === sg186DataList[j]['用户编号']) {
           mergeDataList.push({
             ...basicDataList[i],
             ...sg186DataList[j],
@@ -95,18 +96,27 @@ class Result extends Component {
     }
 
     for (let i = 0; i < mergeDataList.length; i++) {
-      let result = {};
       let data = transformDataListKeys(mergeDataList[i]);
-
       preFilter(data, conf);
-      compose.computeTotal(data, globalConf.global);
-      postFilter(data, conf);
+      let preResult = { ...data };
+      let postResult = {};
 
-      result = { ...data };
-      resultList.push(result);
+      if (preResult.isError === true) {
+        preremovedList.push(preResult);
+      } else {
+        compose.computeTotal(preResult, globalConf.global);
+        postFilter(preResult, conf, globalConf);
+        postResult = { ...preResult };
+
+        if (postResult.postError === true) {
+          postremovdList.push(postResult);
+        } else {
+          resultList.push(postResult);
+        }
+      }
     }
 
-    let listData = { resultList, removedList };
+    let listData = { resultList, preremovedList, postremovdList };
     dispatch({
       type: 'compute/computeResultDataChanged',
       payload: {

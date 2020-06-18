@@ -16,8 +16,8 @@ const handlers = [
     const currents = data.phaseCurrent;
     const transformerCapacity = data.transformerCapacity;
 
-    for (let i = 0; i < currents.length; i++) {
-      if (currents[i] && currents[i] > (transformerCapacity * preLoadCheck) / 100) {
+    for (let i = 0; i < currents.length; i += 2) {
+      if (currents[i] > (1.5 * preLoadCheck) / 100) {
         continue;
       } else {
         return false;
@@ -50,12 +50,8 @@ const handlers = [
     const configCPower = conf.pre.params[conf.defs.preUnderVoltageCheck][4];
     const configMinVol = conf.pre.params[conf.defs.preUnderVoltageCheck][5];
     if (
-      (data['phaseVoltage'][0] <= configMinPower &&
-        data['phaseVoltage'][2] <= configMinPower &&
-        data['phaseVoltage'][2] + data['phaseVoltage'][0] < configTotalMinPower) ||
-      (data['phaseVoltage'][0] < configAPower ||
-        data['phaseVoltage'][1] < configBPower ||
-        data['phaseVoltage'][2] < configCPower)
+      (data['phaseVoltage'][0] <= configMinPower && data['phaseVoltage'][2] <= configMinPower) ||
+      data['phaseVoltage'][2] + data['phaseVoltage'][0] < configTotalMinPower
     ) {
       return false;
     } else {
@@ -65,10 +61,9 @@ const handlers = [
   // 电压不平衡
   function voltageImbalance(data, conf) {
     let maxVol = Math.max(...data['phaseVoltage']);
-    let minVol = Math.max(...data['phaseVoltage']);
+    let minVol = Math.min(...data['phaseVoltage']);
     const limit = conf.pre.params[conf.defs.preVoltageBalanceCheck][0];
     if (maxVol - minVol > maxVol * limit) {
-      console.log('here five');
       return false;
     } else {
       return true;
@@ -77,10 +72,9 @@ const handlers = [
   // 电流不平衡
   function currentImbalance(data, conf) {
     let maxVol = Math.max(...data['phaseCurrent']);
-    let minVol = Math.max(...data['phaseCurrent']);
+    let minVol = Math.min(...data['phaseCurrent']);
     const limit = conf.pre.params[conf.defs.preCurrentBalanceCheck][0];
     if (maxVol - minVol > maxVol * limit) {
-      console.log('here six');
       return false;
     } else {
       return true;
@@ -91,7 +85,6 @@ const handlers = [
     if (data['transformerCapacity'] > conf.pre.params[conf.defs.preCurrentBalanceCheck][0]) {
       return true;
     } else {
-      console.log('here seven');
       return false;
     }
   },
@@ -116,11 +109,12 @@ const preFilter = (data, conf) => {
       } else {
         data.info = `${errorInfo[i]}`;
         data.isError = true;
+        break;
       }
     }
   }
 
-  return true;
+  return data;
 };
 
 export default preFilter;

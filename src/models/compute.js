@@ -3,15 +3,16 @@ const ComputeModel = {
   state: {
     compute: {
       resultDataList: [],
-      removeDataList: []
-    }
+      removeDataList: [],
+      postremovdList: [],
+    },
   },
   effects: {
     *computeResultDataChanged({ payload }, { put }) {
       yield put({
         type: 'rebuildResultData',
         payload: payload,
-      })
+      });
     },
   },
   reducers: {
@@ -19,19 +20,22 @@ const ComputeModel = {
       let { value } = payload;
       let resultDataList = state.compute.resultDataList;
       let removeDataList = state.compute.removeDataList;
-  
-      resultDataList = value.resultList
-      removeDataList = value.removedList
-  
+      let postremovdList = state.compute.postremovdList;
+
+      resultDataList = value.resultList;
+      removeDataList = value.preremovedList;
+      postremovdList = value.postremovdList;
+
       return {
         ...state,
         compute: {
           ...state.compute,
           resultDataList: resultDataList,
-          removeDataList: removeDataList
-        }
-      }
-    }
+          removeDataList: removeDataList,
+          postremovdList: postremovdList,
+        },
+      };
+    },
   },
 };
 
